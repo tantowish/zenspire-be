@@ -32,6 +32,8 @@ model Exp {
   exp        Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@map("exp")
 }
 
 model User {
@@ -113,4 +115,6 @@ model Journal {
   emosi      String[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@map("journals")
 }
