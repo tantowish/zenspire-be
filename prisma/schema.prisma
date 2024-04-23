@@ -37,21 +37,23 @@ model Exp {
 }
 
 model User {
-  id          Int          @id @default(autoincrement())
-  first_name  String       @db.VarChar(255)
-  last_name   String       @db.VarChar(255)
-  email       String       @db.VarChar(255)
-  password    String       @db.VarChar(255)
-  exp         Int          @default(0)
-  isAnonymous Boolean      @default(false)
-  role        Role         @default(user)
-  created_at  DateTime     @default(now())
-  updated_at  DateTime     @updatedAt
-  doctor      Doctor?
-  ChatAI      ChatAI?
-  Discussion  Discussion[]
-  Comment     Comment[]
-  Journal     Journal[]
+  id             Int              @id @default(autoincrement())
+  first_name     String           @db.VarChar(255)
+  last_name      String           @db.VarChar(255)
+  email          String           @db.VarChar(255)
+  password       String           @db.VarChar(255)
+  exp            Int              @default(0)
+  isAnonymous    Boolean          @default(false)
+  role           Role             @default(user)
+  created_at     DateTime         @default(now())
+  updated_at     DateTime         @updatedAt
+  doctor         Doctor?
+  ChatAI         ChatAI?
+  Discussion     Discussion[]
+  Comment        Comment[]
+  Journal        Journal[]
+  DiscussionLike DiscussionLike[]
+  PHQ9           PHQ9[]
 
   @@map("users")
 }
@@ -77,17 +79,28 @@ model ChatAI {
 }
 
 model Discussion {
-  id         Int       @id @default(autoincrement())
-  user_id    Int
-  user       User      @relation(fields: [user_id], references: [id])
-  title      String    @db.VarChar(255)
-  body       String    @db.Text
-  image      String    @db.VarChar(255)
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  comment    Comment[]
+  id             Int              @id @default(autoincrement())
+  user_id        Int
+  user           User             @relation(fields: [user_id], references: [id])
+  title          String           @db.VarChar(255)
+  body           String           @db.Text
+  image          String           @db.VarChar(255)
+  created_at     DateTime         @default(now())
+  updated_at     DateTime         @updatedAt
+  comment        Comment[]
+  DiscussionLike DiscussionLike[]
 
   @@map("discussions")
+}
+
+model DiscussionLike {
+  id            Int        @id @default(autoincrement())
+  user_id       Int
+  user          User       @relation(fields: [user_id], references: [id])
+  discussion_id Int
+  discussion    Discussion @relation(fields: [discussion_id], references: [id])
+
+  @@map("discussion_likes")
 }
 
 model Comment {
@@ -117,4 +130,12 @@ model Journal {
   updated_at DateTime @updatedAt
 
   @@map("journals")
+}
+
+model PHQ9 {
+  id          Int  @id @default(autoincrement())
+  user_id     Int
+  user        User @relation(fields: [user_id], references: [id])
+  question_id Int
+  severity    Int
 }

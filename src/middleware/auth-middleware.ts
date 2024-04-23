@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { ResponseErorr } from "../error/reponse-error";
 import jwt from 'jsonwebtoken'
 import { UserRequest } from "../types/user-request";
 import { UserResponse } from "../model/user-model";
