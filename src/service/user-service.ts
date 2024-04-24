@@ -8,10 +8,10 @@ import bcrypt from 'bcrypt'
 import { User } from "@prisma/client";
 
 export class UserService {
-    static async checkUserExist(username: string) {
+    static async checkUserExist(email: string) {
         const checkUserExist = await prismaClient.user.findUnique({
             where: {
-                username: username
+                email: email
             }
         })
 
@@ -62,9 +62,12 @@ export class UserService {
         }
 
         const payload = {
-            username: user.username,
             email: user.email,
-            name: user.name,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            experience_points: user.experience_points,
+            isAnonymous: user.isAnonymous,
+            role: user.role
         }
         const secretKey = process.env.SECRET_KEY!
         const expiresIn = 60 * 60
@@ -80,11 +83,11 @@ export class UserService {
     static async update(user: User, req: UpdateUserRequest): Promise<UserResponse> {
         const updateRequest = Validation.validate(UserValidation.UPDATE, req)
 
-        await this.checkUserExist(user.username)
+        await this.checkUserExist(user.email)
 
-        if (updateRequest.name) {
-            user.name = updateRequest.name
-        }
+        // if (updateRequest.name) {
+        //     user.name = updateRequest.name
+        // }
 
         if (updateRequest.password) {
             user.password = await bcrypt.hash(updateRequest.password, 10)
@@ -92,11 +95,10 @@ export class UserService {
 
         const userUpdate = await prismaClient.user.update({
             where: {
-                username: user.username,
                 email: user.email
             },
             data: {
-                username: user.name,
+                // username: user.name,
                 password: user.password
             }
         })

@@ -1,47 +1,56 @@
 import { User } from "@prisma/client"
 
 export type UserResponse = {
-    username: string,
-    name: string,
+    first_name: string
+    last_name?: string
     email: string
+    experience_points: number
+    isAnonymous: boolean
+    role: string
 }
 
 export type LoginResponse = {
-    data: UserResponse,
+    data: UserResponse
     token: string
 }
 
 export type RegisterRequest = {
-    username: string
-    name: string
+    first_name: string
+    last_name?: string
     password: string
     email: string
 }
 
 export type UpdateUserRequest = {
-    name?: string,
+    name?: string
     password?: string
 }
 
 export type LoginRequest = {
-    email: string,
+    email: string
     password: string
 }
 
 export function toUserResponse(user: User): UserResponse {
     return {
-        username: user.username,
-        name: user.name,
-        email: user.email
+        first_name: user.first_name,
+        last_name: user.last_name!,
+        email: user.email,
+        experience_points: user.experience_points,
+        isAnonymous: user.isAnonymous,
+        role: user.role
     }
 }
 
 export function toUserLoginResponse(user: User, token: string): LoginResponse {
     return {
         data: {
-            username: user.username,
-            name: user.name,
+            first_name: user.first_name,
+            last_name: user.last_name!,
             email: user.email,
+            experience_points: user.experience_points,
+            isAnonymous: user.isAnonymous,
+            role: user.role
         },
         token: token
     }

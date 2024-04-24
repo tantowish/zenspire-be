@@ -27,42 +27,43 @@ enum Mood {
 }
 
 model Exp {
-  id         Int      @id @default(autoincrement())
-  name       String   @db.VarChar(255)
-  exp        Int
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id                Int      @id @default(autoincrement())
+  name              String   @db.VarChar(255)
+  experience_points Int
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 
   @@map("exp")
 }
 
 model User {
-  id             Int              @id @default(autoincrement())
-  first_name     String           @db.VarChar(255)
-  last_name      String           @db.VarChar(255)
-  email          String           @db.VarChar(255)
-  password       String           @db.VarChar(255)
-  exp            Int              @default(0)
-  isAnonymous    Boolean          @default(false)
-  role           Role             @default(user)
-  created_at     DateTime         @default(now())
-  updated_at     DateTime         @updatedAt
-  doctor         Doctor?
-  ChatAI         ChatAI?
-  Discussion     Discussion[]
-  Comment        Comment[]
-  Journal        Journal[]
-  DiscussionLike DiscussionLike[]
-  PHQ9           PHQ9[]
+  id                Int              @id @default(autoincrement())
+  first_name        String           @db.VarChar(255)
+  last_name         String?          @db.VarChar(255)
+  email             String           @unique @db.VarChar(255)
+  password          String           @db.VarChar(255)
+  experience_points Int              @default(0)
+  isAnonymous       Boolean          @default(false)
+  role              Role             @default(user)
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+  doctor            Doctor?
+  ChatAI            ChatAI?
+  Discussion        Discussion[]
+  Comment           Comment[]
+  Journal           Journal[]
+  DiscussionLike    DiscussionLike[]
+  PHQ9              PHQ9[]
+  Post              Post[]
 
   @@map("users")
 }
 
 model Doctor {
-  id         Int    @id @default(autoincrement())
-  user_id    Int    @unique
-  user       User   @relation(fields: [user_id], references: [id])
-  university String @db.VarChar(255)
+  id         Int     @id @default(autoincrement())
+  user_id    Int     @unique
+  user       User    @relation(fields: [user_id], references: [id])
+  university String? @db.VarChar(255)
 
   @@map("doctors")
 }
@@ -84,7 +85,7 @@ model Discussion {
   user           User             @relation(fields: [user_id], references: [id])
   title          String           @db.VarChar(255)
   body           String           @db.Text
-  image          String           @db.VarChar(255)
+  image          String?          @db.VarChar(255)
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
   comment        Comment[]
@@ -116,14 +117,27 @@ model Comment {
   @@map("comments")
 }
 
+model Post {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  user       User     @relation(fields: [user_id], references: [id])
+  title      String   @db.VarChar(255)
+  body       String   @db.Text
+  image      String?  @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("posts")
+}
+
 model Journal {
   id         Int      @id @default(autoincrement())
   user_id    Int
   user       User     @relation(fields: [user_id], references: [id])
   mood       Mood
-  question_1 String   @db.Text
-  question_2 String   @db.Text
-  question_3 String   @db.Text
+  question_1 String?  @db.Text
+  question_2 String?  @db.Text
+  question_3 String?  @db.Text
   question_4 String   @db.Text
   emosi      String[]
   created_at DateTime @default(now())
