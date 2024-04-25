@@ -15,20 +15,26 @@ Response Body (Success) :
 	"data": 
 	[
 		{
-			"id": 1
+			"id": 1,
+			"user_id": 1,
 			"mood": "baik",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": "lorem epsum",
-			"emosi": ['Senang','Senang']
+			"emosi": ['Senang','Senang'],
+			"created_at": "2024-04-25 15:21:12",
+			"updated_at": "2024-04-25 15:21:12"
 		},
 		{
-			"id": 2
+			"id": 2,
+			"user_id": 1,
 			"mood": "kurang baik",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": null,
-			"emosi": ['Marah','Tidak Senang']
+			"emosi": ['Marah','Tidak Senang'],
+			"created_at": "2024-04-25 15:21:12",
+			"updated_at": "2024-04-25 15:21:12"
 		},
 	]
 }
@@ -42,6 +48,53 @@ Response Body (Failed) :
 }
 ```
 
+### Get List Journals by Date
+
+Endpoint : GET /api/journals?date='yyyy-dd-mm'
+
+Request Header :
+
+- Authorization : "Bearer 1o2ie012dk0sakd01"
+
+Response Body (Success) :
+
+```
+{
+	"data": 
+	[
+		{
+			"id": 1,
+			"user_id": 1,
+			"mood": "baik",
+			"question_1": "lorem epsum",
+			"question_2": "lorem epsum",
+			"question_3": "lorem epsum",
+			"emosi": ['Senang','Senang'],
+			"created_at": "2024-04-25 15:21:12",
+			"updated_at": "2024-04-25 15:21:12"
+		},
+		{
+			"id": 2,
+			"user_id": 1,
+			"mood": "kurang baik",
+			"question_1": "lorem epsum",
+			"question_2": "lorem epsum",
+			"question_3": null,
+			"emosi": ['Marah','Tidak Senang'],
+			"created_at": "2024-04-25 15:21:12",
+			"updated_at": "2024-04-25 15:21:12"
+		},
+	]
+}
+```
+
+Response Body (Failed) :
+
+```
+{
+	"errors": "User is not found"
+}
+```
 
 
 ### Get Journal
@@ -57,12 +110,15 @@ Response Body (Success) :
 ```
 {
 	"data": {
-		"id": 1
+		"id": 1,
+		"user_id",
 		"mood": "baik",
 		"question_1": "lorem epsum",
 		"question_2": "lorem epsum",
 		"question_3": "lorem epsum",
-		"emosi": ['Senang','Senang']
+		"emosi": ['Senang','Senang'],
+		"created_at": "2024-04-25 15:21:12",
+		"updated_at": "2024-04-25 15:21:12"
 	}
 }
 ```
@@ -75,7 +131,6 @@ Response Body (Failed) :
 }
 ```
 
-
 ### Create Journal
 
 Endpoint : POST /api/journals/
@@ -84,7 +139,7 @@ Request Header :
 
 - Authorization : "Bearer 1o2ie012dk0sakd01"
 
-Request Body : 
+Request Body :
 
 ```
 {
@@ -101,12 +156,15 @@ Response Body (success) :
 ```
 {
 	"data": {
-		"id": 1
+		"id": 1,
+		"user_id": 1,
 		"mood": "baik",
 		"question_1": "lorem epsum",
 		"question_2": "lorem epsum",
 		"question_3": "lorem epsum",
-		"emosi": ['Senang','Senang']
+		"emosi": ['Senang','Senang'],
+		"created_at": "2024-04-25 15:21:12",
+		"updated_at": "2024-04-25 15:21:12"
 	}
 }
 ```
@@ -118,7 +176,6 @@ Response Body (failed) :
 	"errors": "mood is required"
 }
 ```
-
 
 ### Update Journal
 
@@ -145,12 +202,15 @@ Response Body (success) :
 ```
 {
 	"data": {
-		"id": 1
+		"id": 1,
+		"user_id": 1,
 		"mood": "baik",
 		"question_1": "lorem epsum edit",
 		"question_2": "lorem epsum edit",
 		"question_3": "lorem epsum",
-		"emosi": ['Senang','Senang']
+		"emosi": ['Senang','Senang'],
+		"created_at": "2024-04-25 15:21:12",
+		"updated_at": "2024-04-25 15:21:12"
 	}
 }
 ```
@@ -162,7 +222,6 @@ Response Body (failed) :
 	"errors": "mood is required"
 }
 ```
-
 
 ### Remove Journal
 
@@ -176,14 +235,7 @@ Response Body (success) :
 
 ```
 {
-	"data": {
-		"id": 1
-		"mood": "baik",
-		"question_1": "lorem epsum edit",
-		"question_2": "lorem epsum edit",
-		"question_3": "lorem epsum",
-		"emosi": ['Senang','Senang']
-	}
+	"message": "Berhasil menghapus jurnal"
 }
 ```
 
