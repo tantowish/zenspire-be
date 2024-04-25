@@ -20,18 +20,22 @@ export class UserService {
         }
     }
 
-    static async register(req: RegisterRequest): Promise<UserResponse> {
-        const registerRequest = Validation.validate(UserValidation.REGISTER, req)
-
+    static async checkDuplicateEmail(email: string){
         const duplicateEmail = await prismaClient.user.findMany({
             where: {
-                email: registerRequest.email
+                email: email
             }
         })
 
         if (duplicateEmail.length > 0) {
             throw new ResponseErorr(400, "Email has already taken")
         }
+    }
+
+    static async register(req: RegisterRequest): Promise<UserResponse> {
+        const registerRequest = Validation.validate(UserValidation.REGISTER, req)
+
+        this.checkDuplicateEmail(registerRequest.email)
 
         registerRequest.password = await bcrypt.hash(registerRequest.password, 10)
 
@@ -85,22 +89,19 @@ export class UserService {
 
         await this.checkUserExist(user.email)
 
-        // if (updateRequest.name) {
-        //     user.name = updateRequest.name
-        // }
+        if (updateRequest.email && updateRequest.email !== user.email) {
+            await this.checkDuplicateEmail(updateRequest.email);
+        }
 
         if (updateRequest.password) {
-            user.password = await bcrypt.hash(updateRequest.password, 10)
+            updateRequest.password = await bcrypt.hash(updateRequest.password, 10)
         }
 
         const userUpdate = await prismaClient.user.update({
             where: {
                 email: user.email
             },
-            data: {
-                // username: user.name,
-                password: user.password
-            }
+            data: updateRequest
         })
 
         return toUserResponse(userUpdate)

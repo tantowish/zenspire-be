@@ -22,7 +22,10 @@ export type RegisterRequest = {
 }
 
 export type UpdateUserRequest = {
-    name?: string
+    first_name?: string
+    last_name?: string
+    email?: string
+    isAnonymous?: boolean
     password?: string
 }
 
