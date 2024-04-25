@@ -47,8 +47,8 @@ model User {
   role              Role             @default(user)
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
-  doctor            Doctor?
   ChatAI            ChatAI?
+  Practitioner      Practitioner?
   Discussion        Discussion[]
   Comment           Comment[]
   Journal           Journal[]
@@ -59,13 +59,17 @@ model User {
   @@map("users")
 }
 
-model Doctor {
-  id         Int     @id @default(autoincrement())
-  user_id    Int     @unique
-  user       User    @relation(fields: [user_id], references: [id])
-  university String? @db.VarChar(255)
+model Practitioner {
+  id              Int     @id @default(autoincrement())
+  user_id         Int     @unique
+  user            User    @relation(fields: [user_id], references: [id])
+  university      String? @db.VarChar(255)
+  no_izin_praktek String? @db.VarChar(255)
+  no_hp           String  @db.VarChar(255)
+  nik             String? @db.VarChar(255)
+  alamat_praktek  String? @db.VarChar(255)
 
-  @@map("doctors")
+  @@map("practitioners")
 }
 
 model ChatAI {
