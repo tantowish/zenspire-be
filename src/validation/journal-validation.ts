@@ -9,4 +9,13 @@ export class JournalValidation {
         question_3: z.string().optional(),
         question_4: z.string(),
     })
+
+    static readonly UPDATE: ZodType = z.object({
+        id: z.number(),
+        mood: z.nativeEnum(Mood),
+        question_1: z.string().optional(),
+        question_2: z.string().optional(),
+        question_3: z.string().optional(),
+        question_4: z.string(),
+    })
 }   

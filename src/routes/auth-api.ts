@@ -14,3 +14,7 @@ apiRouter.patch('/api/users', UserController.update)
 
 // Journals API
 apiRouter.post('/api/journals/', JournalController.create)
+apiRouter.get('/api/journals/', JournalController.list)
+apiRouter.get('/api/journals/:id', JournalController.get)
+apiRouter.put('/api/journals/:id', JournalController.update)
+apiRouter.delete('/api/journals/:id', JournalController.delete)

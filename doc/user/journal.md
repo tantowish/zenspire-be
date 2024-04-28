@@ -96,7 +96,6 @@ Response Body (Failed) :
 }
 ```
 
-
 ### Get Journal
 
 Endpoint : GET /api/journals/:id
@@ -234,7 +233,7 @@ Request Header :
 Response Body (success) :
 
 ```
-{
+	{
 	"message": "Berhasil menghapus jurnal"
 }
 ```
@@ -243,6 +242,6 @@ Response Body (failed) :
 
 ```
 {
-	"errors": "mood is required"
+	"errors": "Journal not found"
 }
 ```
