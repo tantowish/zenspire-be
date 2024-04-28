@@ -8,6 +8,11 @@ Request Header :
 
 - Authorization : "Bearer 1o2ie012dk0sakd01"
 
+Query Parameters (Optional):
+
+- startDate (string): "YYYY-MM-DD". Example: "2024-04-25"
+- endDate (string): "YYYY-MM-DD"
+
 Response Body (Success) :
 
 ```
