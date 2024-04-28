@@ -143,7 +143,6 @@ model Journal {
   question_2 String?  @db.Text
   question_3 String?  @db.Text
   question_4 String   @db.Text
-  emosi      String[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 

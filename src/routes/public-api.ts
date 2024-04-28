@@ -6,3 +6,4 @@ export const publicRouter = express.Router()
 // Auth API
 publicRouter.post('/api/users/register', UserController.register)
 publicRouter.post('/api/users/login', UserController.login)
+
