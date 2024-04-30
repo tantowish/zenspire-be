@@ -1,5 +1,6 @@
 import { Journal, Mood } from "@prisma/client"
 import moment from "moment-timezone"
+import { timezone } from "../types/timezone"
 
 export type JournalResponse = {
     id: number
@@ -31,8 +32,6 @@ export type UpdateJournalRequest = {
 }
 
 export function toJournalResponse(journal: Journal): JournalResponse {
-    const indonesiaTimeZone = 'Asia/Jakarta';
-
     return {
         id: journal.id,
         user_id: journal.user_id,
@@ -41,14 +40,12 @@ export function toJournalResponse(journal: Journal): JournalResponse {
         question_2: journal.question_2!,
         question_3: journal.question_3!,
         question_4: journal.question_4,
-        created_at: moment(journal.created_at).tz(indonesiaTimeZone).format('YYYY-MM-DD HH:mm:ss'), 
-        updated_at: moment(journal.updated_at).tz(indonesiaTimeZone).format('YYYY-MM-DD HH:mm:ss'),
+        created_at: moment(journal.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'), 
+        updated_at: moment(journal.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
     }   
 }
 
 export function toJournalArrayResponse(journals: Journal[]): JournalResponse[] {
-    const indonesiaTimeZone = 'Asia/Jakarta';
-
     return journals.map(journal => ({
         id: journal.id,
         user_id: journal.user_id,
@@ -57,7 +54,7 @@ export function toJournalArrayResponse(journals: Journal[]): JournalResponse[] {
         question_2: journal.question_2!,
         question_3: journal.question_3!,
         question_4: journal.question_4,
-        created_at: moment(journal.created_at).tz(indonesiaTimeZone).format('YYYY-MM-DD HH:mm:ss'), 
-        updated_at: moment(journal.updated_at).tz(indonesiaTimeZone).format('YYYY-MM-DD HH:mm:ss'),
+        created_at: moment(journal.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'), 
+        updated_at: moment(journal.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
     }));
 }

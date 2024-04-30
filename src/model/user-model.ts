@@ -1,4 +1,6 @@
 import { User } from "@prisma/client"
+import moment from "moment-timezone"
+import { timezone } from "../types/timezone"
 
 export type UserResponse = {
     id: number
@@ -8,8 +10,8 @@ export type UserResponse = {
     experience_points: number
     isAnonymous: boolean
     role: string
-    created_at: Date
-    updated_at: Date
+    created_at: string
+    updated_at: string
 }
 
 export type LoginResponse = {
@@ -46,8 +48,8 @@ export function toUserResponse(user: User): UserResponse {
         experience_points: user.experience_points,
         isAnonymous: user.isAnonymous,
         role: user.role,
-        created_at: user.created_at,
-        updated_at: user.updated_at
+        created_at: moment(user.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'), 
+        updated_at: moment(user.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
     }
 }
 
@@ -61,8 +63,8 @@ export function toUserLoginResponse(user: User, token: string): LoginResponse {
             experience_points: user.experience_points,
             isAnonymous: user.isAnonymous,
             role: user.role,
-            created_at: user.created_at,
-            updated_at: user.updated_at
+            created_at: moment(user.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'), 
+            updated_at: moment(user.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
         },
         token: token
     }
