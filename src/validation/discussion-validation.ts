@@ -6,4 +6,11 @@ export class DiscussionValidation {
         body: z.string(),
         image: z.string().min(1).max(255).optional(),
     })
+
+    static readonly UPDATE: ZodType = z.object({
+        id: z.number(),
+        title: z.string().min(1).max(255),
+        body: z.string(),
+        image: z.string().min(1).max(255).optional(),
+    })
 }

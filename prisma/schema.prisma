@@ -47,14 +47,14 @@ model User {
   role              Role             @default(user)
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
-  ChatAI            ChatAI?
-  Practitioner      Practitioner?
-  Discussion        Discussion[]
-  Comment           Comment[]
-  Journal           Journal[]
-  DiscussionLike    DiscussionLike[]
+  chatAI            ChatAI?
+  practitioner      Practitioner?
+  discussion        Discussion[]
+  comment           Comment[]
+  journal           Journal[]
+  discussionLike    DiscussionLike[]
   PHQ9              PHQ9[]
-  Post              Post[]
+  post              Post[]
 
   @@map("users")
 }
@@ -93,7 +93,7 @@ model Discussion {
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
   comment        Comment[]
-  DiscussionLike DiscussionLike[]
+  discussionLike DiscussionLike[]
 
   @@map("discussions")
 }

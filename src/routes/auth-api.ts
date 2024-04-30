@@ -22,3 +22,7 @@ apiRouter.delete('/api/journals/:id', JournalController.delete)
 
 // Discussion API
 apiRouter.post('/api/discussions/', DiscussionController.create)
+apiRouter.get('/api/discussions/', DiscussionController.list)
+apiRouter.get('/api/discussions/current', DiscussionController.listByUser)
+apiRouter.put('/api/discussions/:id', DiscussionController.update)
+apiRouter.delete('/api/discussions/:id', DiscussionController.delete)
