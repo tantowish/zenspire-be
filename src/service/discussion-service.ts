@@ -140,4 +140,5 @@ export class DiscussionService {
         })
 
         return toDiscussionResponse(discussion)
-    }}
+    }
+}

@@ -103,7 +103,7 @@ model DiscussionLike {
   user_id       Int
   user          User       @relation(fields: [user_id], references: [id])
   discussion_id Int
-  discussion    Discussion @relation(fields: [discussion_id], references: [id])
+  discussion    Discussion @relation(fields: [discussion_id], references: [id], onDelete: Cascade)
 
   @@map("discussion_likes")
 }
@@ -113,7 +113,7 @@ model Comment {
   user_id       Int
   user          User       @relation(fields: [user_id], references: [id])
   discussion_id Int
-  discussion    Discussion @relation(fields: [discussion_id], references: [id])
+  discussion    Discussion @relation(fields: [discussion_id], references: [id], onDelete: Cascade)
   body          String     @db.Text
   created_at    DateTime   @default(now())
   updated_at    DateTime   @updatedAt

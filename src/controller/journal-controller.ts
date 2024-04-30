@@ -64,17 +64,4 @@ export class JournalController {
             next(e)
         }
     }
-
-    // static async listByDate(req: UserRequest, res: Response, next: NextFunction) {
-    //     try {
-    //         const startDate = new Date(req.query.startDate as string);
-    //         const endDate = new Date(req.query.endDate as string);
-    //         const response = await JournalService.listByDate(req.user as User, startDate, endDate)
-    //         res.status(200).json({
-    //             response
-    //         })
-    //     } catch (e) {
-    //         next(e)
-    //     }
-    // }
 }
