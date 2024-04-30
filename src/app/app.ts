@@ -3,6 +3,8 @@ import { Request, Response } from 'express'
 import { publicRouter } from '../routes/public-api'
 import { errorMiddleware } from '../middleware/error-middleware'
 import { apiRouter } from '../routes/auth-api'
+require('dotenv').config();
+
 
 export const app = express()
 const port = process.env.PORT || 3000

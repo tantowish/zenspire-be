@@ -35,7 +35,7 @@ export class UserService {
     static async register(req: RegisterRequest): Promise<UserResponse> {
         const registerRequest = Validation.validate(UserValidation.REGISTER, req)
 
-        this.checkDuplicateEmail(registerRequest.email)
+        await this.checkDuplicateEmail(registerRequest.email)
 
         registerRequest.password = await bcrypt.hash(registerRequest.password, 10)
 
@@ -75,7 +75,7 @@ export class UserService {
             role: user.role
         }
         const secretKey = process.env.SECRET_KEY!
-        const expiresIn = 60 * 60
+        const expiresIn = 60 * 60 * 24
         const token = jwt.sign(payload, secretKey, { expiresIn: expiresIn })
 
         return toUserLoginResponse(user, token)

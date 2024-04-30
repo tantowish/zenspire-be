@@ -97,7 +97,7 @@ export class JournalService {
 
         const updateRequest = Validation.validate(JournalValidation.UPDATE, req)
 
-        await this.checkExistingJournal(user.id, req.id)
+        await this.checkExistingJournal(user.id, updateRequest.id)
 
         const journal = await prismaClient.journal.update({
             where: {
@@ -124,27 +124,4 @@ export class JournalService {
 
         return toJournalResponse(journal)
     }
-
-    // static async listByDate(user: User, startDate: Date, endDate: Date): Promise<JournalResponse[]> {
-    //     if(!startDate || !endDate){
-    //         throw new ResponseErorr(500, "start date or end date is invalid")
-    //     }
-
-    //     const indonesiaTimeZone = 'Asia/Jakarta';
-      
-    //     const utcStartDate = moment.tz(startDate, indonesiaTimeZone).utc().startOf('day').toDate();
-    //     const utcEndDate = moment.tz(endDate, indonesiaTimeZone).utc().endOf('day').toDate();
-      
-    //     const journals = await prismaClient.journal.findMany({
-    //       where: {
-    //         user_id: user.id,
-    //         created_at: {
-    //           gte: utcStartDate,
-    //           lte: utcEndDate,
-    //         },
-    //       },
-    //     });
-      
-    //     return toJournalArrayResponse(journals);
-    //   }
 }
