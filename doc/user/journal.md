@@ -26,7 +26,6 @@ Response Body (Success) :
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": "lorem epsum",
-			"emosi": ['Senang','Senang'],
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12"
 		},
@@ -37,7 +36,6 @@ Response Body (Success) :
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": null,
-			"emosi": ['Marah','Tidak Senang'],
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12"
 		},
@@ -74,7 +72,6 @@ Response Body (Success) :
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": "lorem epsum",
-			"emosi": ['Senang','Senang'],
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12"
 		},
@@ -85,7 +82,6 @@ Response Body (Success) :
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": null,
-			"emosi": ['Marah','Tidak Senang'],
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12"
 		},
@@ -120,7 +116,6 @@ Response Body (Success) :
 		"question_1": "lorem epsum",
 		"question_2": "lorem epsum",
 		"question_3": "lorem epsum",
-		"emosi": ['Senang','Senang'],
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 15:21:12"
 	}
@@ -151,7 +146,6 @@ Request Body :
 	"question_1": "lorem epsum",
 	"question_2": "lorem epsum",
 	"question_3": "lorem epsum",
-	"emosi": ['Senang','Senang']
 }
 ```
 
@@ -166,7 +160,6 @@ Response Body (success) :
 		"question_1": "lorem epsum",
 		"question_2": "lorem epsum",
 		"question_3": "lorem epsum",
-		"emosi": ['Senang','Senang'],
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 15:21:12"
 	}
@@ -197,7 +190,6 @@ Request Body :
 	"question_1": "lorem epsum edit",
 	"question_2": "lorem epsum edit",
 	"question_3": "lorem epsum",
-	"emosi": ['Senang','Senang']
 }
 ```
 
@@ -212,7 +204,6 @@ Response Body (success) :
 		"question_1": "lorem epsum edit",
 		"question_2": "lorem epsum edit",
 		"question_3": "lorem epsum",
-		"emosi": ['Senang','Senang'],
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 15:21:12"
 	}
@@ -229,7 +220,7 @@ Response Body (failed) :
 
 ### Remove Journal
 
-Endpoint : PUT /api/journals/:id
+Endpoint : DELETE /api/journals/:id
 
 Request Header :
 
@@ -238,7 +229,7 @@ Request Header :
 Response Body (success) :
 
 ```
-	{
+{
 	"message": "Berhasil menghapus jurnal"
 }
 ```
