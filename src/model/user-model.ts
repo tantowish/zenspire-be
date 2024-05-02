@@ -1,6 +1,6 @@
 import { User } from "@prisma/client"
 import moment from "moment-timezone"
-import { timezone } from "../types/timezone"
+import { timezone } from "../util/timezone"
 
 export type UserResponse = {
     id: number
