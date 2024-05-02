@@ -5,8 +5,8 @@ Zenspire is a mental health app that supports global goals for health, education
 **Clone**
 
 ```
-git clone https://github.com/tantowish/zenify-be.git
-cd zenify-be
+git clone https://github.com/tantowish/zenspire-be.git
+cd zenspire-be
 ```
 
 **Setup Environment**
