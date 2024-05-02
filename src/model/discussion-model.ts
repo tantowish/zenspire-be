@@ -1,6 +1,6 @@
 import { Discussion } from "@prisma/client"
 import moment from "moment-timezone";
-import { timezone } from "../types/timezone";
+import { timezone } from "../util/timezone";
 import { DiscussionWithCount } from "../types/discussion-types";
 
 export type DiscussionResponse = {
