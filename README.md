@@ -1,8 +1,6 @@
-# ZENIFY
+# Zenspire
 
-Zenify is a mental health app
-
-## Getting started
+Zenspire is a mental health app that supports global goals for health, education, and gender equality. Zenspire helps individuals improve their well-being while contributing to Sustainable Development Goals 3 (Good Health and Well-being), 4 (Quality Education), and 5 (Gender Equality).Getting started
 
 **Clone**
 
