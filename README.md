@@ -35,11 +35,10 @@ npx migrate dev
 nodemon run
 ```
 
-## ERD
+## Database ERD
 
-View more about ERD https://drive.google.com/file/d/1hl_IAd1Dvs4QXhHkOvIllhAfTvu_aI7c/view?usp=sharing
+https://drive.google.com/file/d/1hl_IAd1Dvs4QXhHkOvIllhAfTvu_aI7c/view?usp=sharing
 
-
-## API Documentation
+## API Spec Documentation
 
 https://github.com/tantowish/zenify-be/tree/main/doc
