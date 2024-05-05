@@ -48,7 +48,6 @@ Response Body (Success) :
 				"first_name": "Tantowi",
 				"last_name": null,
 				"isAnonymous": true,
-
 			}
 		},
 	]
@@ -112,7 +111,6 @@ Response Body (Success) :
 				"first_name": "Tantowi",
 				"last_name": null,
 				"isAnonymous": true,
-
 			}
 		},
 	]
@@ -126,7 +124,6 @@ Response Body (Failed) :
 	"errors": "User is not found"
 }
 ```
-
 
 ### Get Discussion
 
