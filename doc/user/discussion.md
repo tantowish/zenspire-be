@@ -1,6 +1,6 @@
 # Discussion API Spec
 
-### Get List Discussion		
+### Get List Discussion
 
 Endpoint : GET /api/disscusions
 
@@ -23,13 +23,13 @@ Response Body (Success) :
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
-				comment: 12,
-				discussionLike: 102
+				"comment": 12,
+				"discussionLike": 102
 			},
 			"user": {
-				first_name: "Tantowi",
-				last_name: null,
-				isAnonymous: true
+				"first_name": "Tantowi",
+				"last_name": null,
+				"isAnonymous": true
 			}
 		},
 		{
@@ -41,13 +41,14 @@ Response Body (Success) :
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
-				comment: 12,
-				discussionLike: 102
+				"comment": 12,
+				"discussionLike": 102
 			},
 			"user": {
-				first_name: "Tantowi",
-				last_name: null,
-				isAnonymous: true
+				"first_name": "Tantowi",
+				"last_name": null,
+				"isAnonymous": true,
+
 			}
 		},
 	]
@@ -61,7 +62,6 @@ Response Body (Failed) :
 	"errors": "User is not found"
 }
 ```
-
 
 ### Get Discussion
 
@@ -84,13 +84,13 @@ Response Body :
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
-				comment: 12,
-				discussionLike: 102
+				"comment": 12,
+				"discussionLike": 102
 			},
 			"user": {
-				first_name: "Tantowi",
-				last_name: null,
-				isAnonymous: true
+				"first_name": "Tantowi",
+				"last_name": null,
+				"isAnonymous": true
 			},
 			"comment": [
 				{
@@ -159,7 +159,6 @@ Response Body (Success):
 }
 ```
 
-
 Response Body (failed) :
 
 ```
@@ -167,7 +166,6 @@ Response Body (failed) :
 	"errors": "body is required"
 }
 ```
-
 
 ### Update Discussion
 
@@ -210,7 +208,6 @@ Response Body (failed) :
 	"errors": "body is required"
 }
 ```
-
 
 ### Remove Discussion
 
