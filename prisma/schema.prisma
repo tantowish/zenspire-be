@@ -99,12 +99,12 @@ model Discussion {
 }
 
 model DiscussionLike {
-  id            Int        @id @default(autoincrement())
-  user_id       Int
+  user_id       Int   
   user          User       @relation(fields: [user_id], references: [id])
-  discussion_id Int
+  discussion_id Int       
   discussion    Discussion @relation(fields: [discussion_id], references: [id], onDelete: Cascade)
 
+  @@id([user_id, discussion_id])
   @@map("discussion_likes")
 }
 

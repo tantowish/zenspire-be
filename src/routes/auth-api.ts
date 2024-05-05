@@ -28,6 +28,7 @@ apiRouter.put('/api/discussions/:id', DiscussionController.update)
 apiRouter.delete('/api/discussions/:id', DiscussionController.delete)
 
 // Discussion Like
+apiRouter.post('/api/discussions/:id/like', DiscussionController.like)
 
 
 // Comment API

@@ -211,7 +211,7 @@ Response Body (failed) :
 
 ### Remove Discussion
 
-Endpoint : DELETE /api/journals/:id
+Endpoint : DELETE /api/discussions/:id
 
 Request Header :
 
@@ -230,5 +230,30 @@ Response Body (failed) :
 ```
 {
 	"errors": "Journal not found"
+}
+```
+
+
+### Like Discussion
+
+Endpoint : POST /api/discussions/:id/like
+
+Request Header :
+
+- Authorization : "Bearer 1o2ie012dk0sakd01"
+
+Response Body (success) :
+
+```
+{
+	"message": "Berhasil like discussion id 2"
+}
+```
+
+Response Body (failed) :
+
+```
+{
+	"errors": "Discussion not found"
 }
 ```

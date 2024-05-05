@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { CreateDiscussionRequest, DiscussionResponse, UpdateDiscussionRequest, toDiscussionArrayFullResponse, toDiscussionResponse } from "../model/discussion-model";
+import { CreateDiscussionRequest, DiscussionLikeResponse, DiscussionResponse, UpdateDiscussionRequest, toDiscussionArrayFullResponse, toDiscussionLikeResponse, toDiscussionResponse } from "../model/discussion-model";
 import { Validation } from "../validation/validation";
 import { DiscussionValidation } from "../validation/discussion-validation";
 import { prismaClient } from "../app/database";
@@ -140,5 +140,49 @@ export class DiscussionService {
         })
 
         return toDiscussionResponse(discussion)
+    }
+
+    static async like(user: User, id: number): Promise<string> {
+        if (!id) {
+            throw new ResponseErorr(500, "id is invalid")
+        }
+
+        const existingDisscusion = await prismaClient.discussion.findUnique({
+            where: {
+                id: id,
+            },
+        });
+
+        if (!existingDisscusion) {
+            throw new ResponseErorr(404, "Discussion not found");
+        }
+
+        const checkDiscussionLikeExist = await prismaClient.discussionLike.findFirst({
+            where: {
+                user_id: user.id,
+                discussion_id: id
+            }
+        })
+
+        if(checkDiscussionLikeExist){
+            await prismaClient.discussionLike.deleteMany({
+                where: {
+                    user_id: user.id,
+                    discussion_id: id
+                }
+            })
+
+            return `Berhasil unlike discussion id ${id}`
+        }
+        else{
+            await prismaClient.discussionLike.create({
+                data: {
+                    user_id: user.id,
+                    discussion_id: id
+                }
+            })
+
+            return `Berhasil like discussion id ${id}`
+        }
     }
 }
