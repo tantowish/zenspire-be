@@ -1,9 +1,9 @@
 import express from 'express'
 import { UserController } from '../controller/user-controller'
 import { authMiddleware } from '../middleware/auth-middleware'
-import { practitionerMiddleware } from '../middleware/practitioner-middleware'
 import { JournalController } from '../controller/journal-controller'
 import { DiscussionController } from '../controller/discussion-controller'
+import { CommentController } from '../controller/comment-controller'
 
 export const apiRouter = express.Router()
 
@@ -30,6 +30,10 @@ apiRouter.delete('/api/discussions/:id', DiscussionController.delete)
 // Discussion Like
 apiRouter.post('/api/discussions/:id/like', DiscussionController.like)
 
-
 // Comment API
+apiRouter.post('/api/discussions/:discussionId/comments', CommentController.create)
+apiRouter.get('/api/discussions/:discussionId/comments', CommentController.list)
+apiRouter.get('/api/discussions/:discussionId/comments/:commentId', CommentController.get)
+apiRouter.put('/api/discussions/:discussionId/comments/:commentId', CommentController.update)
+apiRouter.delete('/api/discussions/:discussionId/comments/:commentId', CommentController.delete)
 

@@ -65,7 +65,7 @@ export function toDiscussionResponse(discussion: Discussion): DiscussionResponse
 export function toDiscussionLikeResponse(discussionLike: DiscussionLike): DiscussionLikeResponse {
     return {
         user_id: discussionLike.user_id,
-        discussion_id: discussionLike.discussion_id
+        discussion_id: discussionLike.discussion_id 
     }
 }
 
