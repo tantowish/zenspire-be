@@ -3,7 +3,6 @@ import { UserRequest } from "../types/user-request"
 import { CreateDiscussionRequest, UpdateDiscussionRequest } from "../model/discussion-model";
 import { DiscussionService } from "../service/discussion-service";
 import { User } from "@prisma/client";
-import { ResponseErorr } from "../error/reponse-error";
 
 export class DiscussionController {
     static async create(req: UserRequest, res: Response, next: NextFunction) {

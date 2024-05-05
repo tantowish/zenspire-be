@@ -22,6 +22,8 @@ export class JournalService {
         if (existingJournal.user_id != user_id) {
             throw new ResponseErorr(401, "Unauthorized")
         }
+
+        return existingJournal
     }
 
     static async create(user: User, req: CreateJournalRequest): Promise<JournalResponse> {
@@ -73,19 +75,7 @@ export class JournalService {
             throw new ResponseErorr(500, "id is invalid")
         }
 
-        const journal = await prismaClient.journal.findUnique({
-            where: {
-                id: id
-            }
-        })
-
-        if (!journal) {
-            throw new ResponseErorr(404, "Journal not found")
-        }
-
-        if (journal.user_id != user.id) {
-            throw new ResponseErorr(401, "Unauthorized")
-        }
+        const journal = await this.checkExistingJournal(user.id, id)
 
         return toJournalResponse(journal)
     }

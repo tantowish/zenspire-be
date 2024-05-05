@@ -24,10 +24,10 @@ export class DiscussionService {
     }
 
     static async create(user: User, req: CreateDiscussionRequest): Promise<DiscussionResponse> {
-        const discussionResponse = Validation.validate(DiscussionValidation.CREATE, req)
+        const discussionRequest = Validation.validate(DiscussionValidation.CREATE, req)
 
         const data = {
-            ...discussionResponse,
+            ...discussionRequest,
             user_id: user.id
         }
 
