@@ -64,5 +64,15 @@ export class DiscussionController {
         }
     }
 
+    static async like(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await DiscussionService.like(req.user as User, parseInt(req.params.id))
+            res.status(200).json({
+                message: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
     
 }

@@ -1,4 +1,4 @@
-import { Discussion } from "@prisma/client"
+import { Discussion, DiscussionLike } from "@prisma/client"
 import moment from "moment-timezone";
 import { timezone } from "../util/timezone";
 import { DiscussionWithCount } from "../types/discussion-types";
@@ -11,6 +11,11 @@ export type DiscussionResponse = {
     image?: string,
     created_at: string,
     updated_at: string,
+}
+
+export type DiscussionLikeResponse = {
+    user_id: number
+    discussion_id: number
 }
 
 export type DiscussionFullResponse = {
@@ -54,6 +59,13 @@ export function toDiscussionResponse(discussion: Discussion): DiscussionResponse
         image: discussion.image!,
         created_at: moment(discussion.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
         updated_at: moment(discussion.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
+    }
+}
+
+export function toDiscussionLikeResponse(discussionLike: DiscussionLike): DiscussionLikeResponse {
+    return {
+        user_id: discussionLike.user_id,
+        discussion_id: discussionLike.discussion_id
     }
 }
 
