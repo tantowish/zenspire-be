@@ -39,6 +39,28 @@ export class DiscussionController {
         }
     }
 
+    static async listPopular(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await DiscussionService.listPopular()
+            res.status(200).json({
+                data: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    static async get(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await DiscussionService.get(parseInt(req.params.id))
+            res.status(200).json({
+                data: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
+
     static async update(req: UserRequest, res: Response, next: NextFunction) {
         try {
             const request: UpdateDiscussionRequest = req.body as UpdateDiscussionRequest

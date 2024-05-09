@@ -160,7 +160,6 @@ Response Body (failed) :
 }
 ```
 
-
 ### Remove Comment
 
 Endpoint : DELETE /api/disscusions/:id/comments/:id

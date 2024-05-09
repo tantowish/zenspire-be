@@ -1,7 +1,9 @@
 import { Discussion, DiscussionLike } from "@prisma/client"
 import moment from "moment-timezone";
 import { timezone } from "../util/timezone";
-import { DiscussionWithCount } from "../types/discussion-types";
+import { DiscussionDetail, DiscussionPopular, DiscussionWithCount } from "../types/discussion-types";
+import { CommentWithUser } from "../types/comment-types";
+import { CommentFullResponse } from "./comment-model";
 
 export type DiscussionResponse = {
     id: number,
@@ -35,6 +37,26 @@ export type DiscussionFullResponse = {
         last_name?: string;
         isAnonymous: boolean;
     }
+}
+
+export type DiscussionDetailResponse = {
+    id: number,
+    user_id: number,
+    title: string,
+    body: string,
+    image?: string,
+    created_at: string,
+    updated_at: string,
+    _count: {
+        comment: number;
+        discussionLike: number;
+    }
+    user: {
+        first_name: string;
+        last_name?: string;
+        isAnonymous: boolean;
+    }
+    comment: CommentFullResponse[]
 }
 
 export type CreateDiscussionRequest = {
@@ -85,4 +107,59 @@ export function toDiscussionArrayFullResponse(discussions: DiscussionWithCount[]
             isAnonymous: discussion.user.isAnonymous
         }
     }));
+}
+
+export function toDiscussionArrayFullResponsePopular(discussions: DiscussionPopular[]): DiscussionFullResponse[] {
+    return discussions.map((discussion) => ({
+        id: discussion.id,
+        user_id: discussion.user_id,
+        title: discussion.title,
+        body: discussion.body,
+        image: discussion.image!, // Handle optional image
+        created_at: moment(discussion.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
+        updated_at: moment(discussion.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
+        _count: {
+            comment: discussion.comment,
+            discussionLike: discussion.discussionLike
+        },
+        user: {
+            first_name: discussion.first_name,
+            last_name: discussion.last_name!,
+            isAnonymous: discussion.isAnonymous
+        }
+    }));
+}
+
+export function toDiscussionDetailResponse(discussion: DiscussionDetail): DiscussionDetailResponse {
+    return {
+        id: discussion.id,
+        user_id: discussion.user_id,
+        title: discussion.title,
+        body: discussion.body,
+        image: discussion.image!,
+        created_at: moment(discussion.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
+        updated_at: moment(discussion.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
+        _count: {
+            comment: discussion._count.comment,
+            discussionLike: discussion._count.discussionLike
+        },
+        user: {
+            first_name: discussion.user.first_name,
+            last_name: discussion.user.last_name!,
+            isAnonymous: discussion.user.isAnonymous
+        },
+        comment: discussion.comment.map(comment => ({
+            id: comment.id,
+            user_id: comment.user_id,
+            discussion_id: comment.discussion_id,
+            body: comment.body,
+            updated_at: moment(comment.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
+            created_at: moment(comment.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
+            user: {
+              first_name: comment.user.first_name,
+              last_name: comment.user.last_name!,
+              isAnonymous: comment.user.isAnonymous
+            }
+        }))
+    };
 }

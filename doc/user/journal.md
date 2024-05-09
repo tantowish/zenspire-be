@@ -1,6 +1,6 @@
 # Journal API Spec
 
-### Get List Journals
+### Get List Journal
 
 Endpoint : GET /api/journals
 
@@ -23,6 +23,7 @@ Response Body (Success) :
 			"id": 1,
 			"user_id": 1,
 			"mood": "baik",
+			"title": "kejadian unik",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": "lorem epsum",
@@ -33,6 +34,7 @@ Response Body (Success) :
 			"id": 2,
 			"user_id": 1,
 			"mood": "kurang baik",
+			"title": "kejadian unik 2",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": null,
@@ -51,7 +53,7 @@ Response Body (Failed) :
 }
 ```
 
-### Get List Journals by Date
+### Get List Journal by Date
 
 Endpoint : GET /api/journals?date='yyyy-dd-mm'
 
@@ -69,6 +71,7 @@ Response Body (Success) :
 			"id": 1,
 			"user_id": 1,
 			"mood": "baik",
+			"title": "kejadian unik",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": "lorem epsum",
@@ -79,6 +82,7 @@ Response Body (Success) :
 			"id": 2,
 			"user_id": 1,
 			"mood": "kurang baik",
+			"title": "kejadian unik",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": null,
@@ -113,6 +117,7 @@ Response Body (Success) :
 		"id": 1,
 		"user_id",
 		"mood": "baik",
+		"title": "kejadian unik",
 		"question_1": "lorem epsum",
 		"question_2": "lorem epsum",
 		"question_3": "lorem epsum",
@@ -143,6 +148,7 @@ Request Body :
 ```
 {
 	"mood": "baik",
+	"title": "kejadian unik",
 	"question_1": "lorem epsum",
 	"question_2": "lorem epsum",
 	"question_3": "lorem epsum",
@@ -157,6 +163,7 @@ Response Body (success) :
 		"id": 1,
 		"user_id": 1,
 		"mood": "baik",
+		"title": "kejadian unik",
 		"question_1": "lorem epsum",
 		"question_2": "lorem epsum",
 		"question_3": "lorem epsum",
@@ -187,6 +194,7 @@ Request Body :
 ```
 {
 	"mood": "baik",
+	"title": "kejadian unik",
 	"question_1": "lorem epsum edit",
 	"question_2": "lorem epsum edit",
 	"question_3": "lorem epsum",
@@ -201,6 +209,7 @@ Response Body (success) :
 		"id": 1,
 		"user_id": 1,
 		"mood": "baik",
+		"title": "kejadian unik",
 		"question_1": "lorem epsum edit",
 		"question_2": "lorem epsum edit",
 		"question_3": "lorem epsum",
