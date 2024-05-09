@@ -23,10 +23,11 @@ cp .env.example .env
 npm install
 ```
 
-**Migrate the database**
+**Generate & Migrate the database**
 
 ```
-npx migrate dev
+npx prisma generate
+npx prisma migrate dev
 ```
 
 **Running Service**

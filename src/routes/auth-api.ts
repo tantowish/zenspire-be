@@ -24,6 +24,8 @@ apiRouter.delete('/api/journals/:id', JournalController.delete)
 apiRouter.post('/api/discussions/', DiscussionController.create)
 apiRouter.get('/api/discussions/', DiscussionController.list)
 apiRouter.get('/api/discussions/current', DiscussionController.listByUser)
+apiRouter.get('/api/discussions/popular', DiscussionController.listPopular)
+apiRouter.get('/api/discussions/:id', DiscussionController.get)
 apiRouter.put('/api/discussions/:id', DiscussionController.update)
 apiRouter.delete('/api/discussions/:id', DiscussionController.delete)
 

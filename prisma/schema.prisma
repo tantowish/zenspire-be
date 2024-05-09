@@ -26,6 +26,11 @@ enum Mood {
   angry
 }
 
+enum Gender {
+  P
+  L
+}
+
 model Exp {
   id                Int      @id @default(autoincrement())
   name              String   @db.VarChar(255)
@@ -55,8 +60,22 @@ model User {
   discussionLike    DiscussionLike[]
   PHQ9              PHQ9[]
   post              Post[]
+  UserData          UserData?
 
   @@map("users")
+}
+
+model UserData {
+  id               Int      @id @default(autoincrement())
+  user_id          Int      @unique
+  user             User     @relation(fields: [user_id], references: [id])
+  gender           Gender
+  birthday         DateTime
+  health_condition Json
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  @@map("user_datas")
 }
 
 model Practitioner {
@@ -99,9 +118,9 @@ model Discussion {
 }
 
 model DiscussionLike {
-  user_id       Int   
+  user_id       Int
   user          User       @relation(fields: [user_id], references: [id])
-  discussion_id Int       
+  discussion_id Int
   discussion    Discussion @relation(fields: [discussion_id], references: [id], onDelete: Cascade)
 
   @@id([user_id, discussion_id])
@@ -135,18 +154,28 @@ model Post {
 }
 
 model Journal {
-  id         Int      @id @default(autoincrement())
+  id         Int         @id @default(autoincrement())
   user_id    Int
-  user       User     @relation(fields: [user_id], references: [id])
+  user       User        @relation(fields: [user_id], references: [id])
   mood       Mood
-  question_1 String?  @db.Text
-  question_2 String?  @db.Text
-  question_3 String?  @db.Text
-  question_4 String   @db.Text
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  title      String      @db.VarChar(20)
+  question_1 String      @db.Text
+  question_2 String      @db.Text
+  question_3 String?     @db.Text
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  JournalAI  JournalAI[]
 
   @@map("journals")
+}
+
+model JournalAI {
+  id         Int     @id @default(autoincrement())
+  journal_id Int
+  journal    Journal @relation(fields: [journal_id], references: [id], onDelete: Cascade)
+  body       String  @db.Text
+
+  @@map("journal_ai")
 }
 
 model PHQ9 {

@@ -35,10 +35,9 @@ Response Body (Failed) :
 
 ```
 {
-	"errors": "Username must not blank, ..."
+	"errors": "Email must not blank, ..."
 }
 ```
-
 
 ### Login User
 
@@ -48,9 +47,8 @@ Request Body :
 
 ```
 {
-	"username": "tantows001",
+	"email": "tantows001@gmail.com",
 	"password": "12354",
-	"name": "Tantowi Shah Hanif"
 }
 ```
 
@@ -78,7 +76,6 @@ Response Body (Failed) :
 	"errors": "Username must not blank, ..."
 }
 ```
-
 
 ### Oauth User
 
@@ -117,7 +114,6 @@ Response Body (Failed) :
 }
 ```
 
-
 ### Get User
 
 Endpoint : GET /api/users/current
@@ -147,6 +143,6 @@ Response Body (Failed) :
 
 ```
 {
-	"errors": "Username must not blank, ..."
+	"errors": "Email must not blank, ..."
 }
 ```

@@ -62,7 +62,6 @@ Response Body (Failed) :
 }
 ```
 
-
 ### Get List Discussion By Current User
 
 Endpoint : GET /api/disscusions/current
@@ -125,7 +124,69 @@ Response Body (Failed) :
 }
 ```
 
-### Get Discussion
+### Get List Discussion Popular
+
+Endpoint : GET /api/disscusions/popular
+
+Request Header :
+
+- Authorization : "Bearer 1o2ie012dk0sakd01"
+
+Response Body (Success) :
+
+```
+{
+	"data": 
+	[
+		{
+			"id": 1,
+			"user_id": 1,
+			"title": "baik",
+			"body": "lorem epsum",
+			"image": "lorem epsum.png",
+			"created_at": "2024-04-25 15:21:12",
+			"updated_at": "2024-04-25 15:21:12",
+			"_count": {
+				"comment": 12,
+				"discussionLike": 102
+			},
+			"user": {
+				"first_name": "Tantowi",
+				"last_name": null,
+				"isAnonymous": true
+			}
+		},
+		{
+			"id": 2,
+			"user_id": 1,
+			"title": "kurang baik",
+			"body": "lorem epsum",
+			"image": "lorem epsum.png",
+			"created_at": "2024-04-25 15:21:12",
+			"updated_at": "2024-04-25 15:21:12",
+			"_count": {
+				"comment": 12,
+				"discussionLike": 102
+			},
+			"user": {
+				"first_name": "Tantowi",
+				"last_name": null,
+				"isAnonymous": true,
+			}
+		},
+	]
+}
+```
+
+Response Body (Failed) :
+
+```
+{
+	"errors": "User is not found"
+}
+```
+
+### Get Discussion (update)
 
 Endpoint : GET /api/disscusions/:id
 
@@ -294,7 +355,6 @@ Response Body (failed) :
 	"errors": "Journal not found"
 }
 ```
-
 
 ### Like Discussion
 
