@@ -7,6 +7,7 @@ export type DiscussionWithCount = Discussion & {
         discussionLike: number;
     },
     user: {
+        experience_points: number
         first_name: string;
         last_name: string | null;
         isAnonymous: boolean;
@@ -14,6 +15,7 @@ export type DiscussionWithCount = Discussion & {
 };
 
 export type DiscussionPopular = Discussion & {
+    experience_points: number,
     first_name: string,
     last_name: string | null
     isAnonymous: boolean
@@ -27,6 +29,7 @@ export type DiscussionDetail = Discussion & {
         discussionLike: number;
     },
     user: {
+        experience_points: number
         first_name: string;
         last_name: string | null;
         isAnonymous: boolean;

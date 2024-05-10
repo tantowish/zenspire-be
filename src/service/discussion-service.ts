@@ -58,6 +58,7 @@ export class DiscussionService {
                 },
                 user: {
                     select: {
+                        experience_points: true,
                         first_name: true,
                         last_name: true,
                         isAnonymous: true,
@@ -73,8 +74,6 @@ export class DiscussionService {
     }
 
     static async listByUser(user: User): Promise<DiscussionResponse[]> {
-        await UserService.checkUserExist(user.email)
-
         const discussions = await prismaClient.discussion.findMany({
             select: {
                 id: true,
@@ -92,6 +91,7 @@ export class DiscussionService {
                 },
                 user: {
                     select: {
+                        experience_points: true,
                         first_name: true,
                         last_name: true,
                         isAnonymous: true,
@@ -109,6 +109,46 @@ export class DiscussionService {
         return toDiscussionArrayFullResponse(discussions)
     }
 
+    static async listLiked(user: User): Promise<DiscussionResponse[]> {
+        const discussions = await prismaClient.discussion.findMany({
+            select: {
+                id: true,
+                user_id: true,
+                title: true,
+                body: true,
+                image: true,
+                created_at: true,
+                updated_at: true,
+                _count: {
+                    select: {
+                        comment: true,
+                        discussionLike: true,
+                    },
+                },
+                user: {
+                    select: {
+                        experience_points: true,
+                        first_name: true,
+                        last_name: true,
+                        isAnonymous: true,
+                    },
+                },
+            },
+            orderBy: {
+                updated_at: 'asc',
+            },
+            where: {
+                discussionLike: {
+                    some: {
+                        user_id: user.id
+                    }
+                }
+            }
+        });
+
+        return toDiscussionArrayFullResponse(discussions)
+    }
+
     static async listPopular(): Promise<DiscussionResponse[]> {
         const twoWeeksAgo = moment().subtract(2, 'weeks').toDate();
 
@@ -120,7 +160,7 @@ export class DiscussionService {
             INNER JOIN users u ON d.user_id = u.id
             WHERE d.updated_at >= ${twoWeeksAgo}
             ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
-            LIMIT 2;
+            LIMIT 1;
             `;
 
         if (discussions.length === 0) {
@@ -131,7 +171,7 @@ export class DiscussionService {
                 FROM discussion d
                 INNER JOIN users u ON d.user_id = u.id
                 ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
-                LIMIT 2;
+                LIMIT 1;
                 `;
         }
 
@@ -163,6 +203,7 @@ export class DiscussionService {
                 },
                 user: {
                     select: {
+                        experience_points: true,
                         first_name: true,
                         last_name: true,
                         isAnonymous: true,
@@ -178,6 +219,7 @@ export class DiscussionService {
                         updated_at: true,
                         user: {
                             select: {
+                                experience_points: true,
                                 first_name: true,
                                 last_name: true,
                                 isAnonymous: true,

@@ -20,6 +20,7 @@ export type CommentFullResponse = {
     created_at: string,
     updated_at: string,
     user: {
+        experience_points: number
         first_name: string;
         last_name?: string;
         isAnonymous: boolean;
@@ -56,6 +57,7 @@ export function toCommentArrayFullResponse(comments: CommentWithUser[]): Comment
         created_at: moment(comment.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         updated_at: moment(comment.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         user: {
+            experience_points: comment.user.experience_points,
             first_name: comment.user.first_name,
             last_name: comment.user.last_name!,
             isAnonymous: comment.user.isAnonymous

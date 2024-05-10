@@ -50,6 +50,17 @@ export class DiscussionController {
         }
     }
 
+    static async listLiked(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await DiscussionService.listLiked(req.user as User)
+            res.status(200).json({
+                data: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
+
     static async get(req: UserRequest, res: Response, next: NextFunction) {
         try {
             const response = await DiscussionService.get(parseInt(req.params.id))
