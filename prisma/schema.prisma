@@ -19,11 +19,11 @@ enum Role {
 }
 
 enum Mood {
-  happy
-  relaxed
-  indifferent
-  sad
-  angry
+  sangat_baik
+  baik
+  biasa
+  buruk
+  sangat_buruk
 }
 
 enum Gender {

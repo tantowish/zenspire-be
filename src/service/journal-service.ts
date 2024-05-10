@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { CreateJournalRequest, JournalResponse, UpdateJournalRequest, toJournalArrayResponse, toJournalResponse } from "../model/journal-model";
+import { CreateJournalRequest, JournalResponse, MoodCountResponse, UpdateJournalRequest, toJournalArrayResponse, toJournalResponse, toMoodCountsResponse } from "../model/journal-model";
 import { Validation } from "../validation/validation";
 import { JournalValidation } from "../validation/journal-validation";
 import { prismaClient } from "../app/database";
@@ -43,7 +43,6 @@ export class JournalService {
 
     static async list(user: User, startDate: Date, endDate: Date): Promise<JournalResponse[]> {
         let journals;
-        console.log(startDate, endDate)
         if(isNaN(startDate.getDate()) || isNaN(endDate.getDate())){
             journals = await prismaClient.journal.findMany({
                 where: {
@@ -113,5 +112,24 @@ export class JournalService {
         })
 
         return toJournalResponse(journal)
+    }
+
+    static async moodCount(user: User): Promise<MoodCountResponse[]> {
+        const twoWeeksAgo = moment().subtract(2, 'weeks').toDate();
+
+        const moodCounts = await prismaClient.journal.groupBy({
+            by: ['mood'],
+            _count: {
+                _all: true
+            },
+            where: {
+                user_id: user.id,
+                updated_at: {
+                gte: twoWeeksAgo
+                }
+            }
+        });
+
+        return toMoodCountsResponse(moodCounts)
     }
 }

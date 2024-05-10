@@ -1,6 +1,7 @@
 import { Journal, Mood } from "@prisma/client"
 import moment from "moment-timezone"
 import { timezone } from "../util/timezone"
+import { MoodCount } from "../types/journal-types"
 
 export type JournalResponse = {
     id: number
@@ -31,6 +32,11 @@ export type UpdateJournalRequest = {
     question_3?: string
 }
 
+export type MoodCountResponse = {
+    mood: string;
+    count: number;
+};
+
 export function toJournalResponse(journal: Journal): JournalResponse {
     return {
         id: journal.id,
@@ -56,5 +62,16 @@ export function toJournalArrayResponse(journals: Journal[]): JournalResponse[] {
         question_3: journal.question_3!,
         created_at: moment(journal.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'), 
         updated_at: moment(journal.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
+    }));
+}
+
+export function toMoodCountsResponse(moodCounts: MoodCount[]): MoodCountResponse[] {
+    const allMoods = Object.values(Mood); 
+
+    const moodCountMap = new Map(moodCounts.map(item => [item.mood, item._count._all]));
+  
+    return allMoods.map(mood => ({
+      mood,
+      count: moodCountMap.get(mood) || 0
     }));
 }

@@ -64,4 +64,15 @@ export class JournalController {
             next(e)
         }
     }
+
+    static async moodCount(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await JournalService.moodCount(req.user as User)
+            res.status(200).json({
+                data: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
 }
