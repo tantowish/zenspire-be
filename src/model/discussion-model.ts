@@ -33,6 +33,7 @@ export type DiscussionFullResponse = {
         discussionLike: number;
     }
     user: {
+        experience_points: number
         first_name: string;
         last_name?: string;
         isAnonymous: boolean;
@@ -52,6 +53,7 @@ export type DiscussionDetailResponse = {
         discussionLike: number;
     }
     user: {
+        experience_points: number
         first_name: string;
         last_name?: string;
         isAnonymous: boolean;
@@ -102,6 +104,7 @@ export function toDiscussionArrayFullResponse(discussions: DiscussionWithCount[]
         updated_at: moment(discussion.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         _count: discussion._count,
         user: {
+            experience_points: discussion.user.experience_points,
             first_name: discussion.user.first_name,
             last_name: discussion.user.last_name!,
             isAnonymous: discussion.user.isAnonymous
@@ -123,6 +126,7 @@ export function toDiscussionArrayFullResponsePopular(discussions: DiscussionPopu
             discussionLike: discussion.discussionLike
         },
         user: {
+            experience_points: discussion.experience_points,
             first_name: discussion.first_name,
             last_name: discussion.last_name!,
             isAnonymous: discussion.isAnonymous
@@ -144,6 +148,7 @@ export function toDiscussionDetailResponse(discussion: DiscussionDetail): Discus
             discussionLike: discussion._count.discussionLike
         },
         user: {
+            experience_points: discussion.user.experience_points,
             first_name: discussion.user.first_name,
             last_name: discussion.user.last_name!,
             isAnonymous: discussion.user.isAnonymous
@@ -156,9 +161,10 @@ export function toDiscussionDetailResponse(discussion: DiscussionDetail): Discus
             updated_at: moment(comment.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
             created_at: moment(comment.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
             user: {
-              first_name: comment.user.first_name,
-              last_name: comment.user.last_name!,
-              isAnonymous: comment.user.isAnonymous
+                experience_points: comment.user.experience_points,
+                first_name: comment.user.first_name,
+                last_name: comment.user.last_name!,
+                isAnonymous: comment.user.isAnonymous,
             }
         }))
     };

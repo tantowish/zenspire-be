@@ -78,6 +78,7 @@ export class CommentService {
                 updated_at: true,
                 user: {
                     select : {
+                        experience_points: true,
                         first_name: true,
                         last_name: true,
                         isAnonymous: true,

@@ -71,7 +71,7 @@ model UserData {
   user             User     @relation(fields: [user_id], references: [id])
   gender           Gender
   birthday         DateTime
-  health_condition Json
+  health_condition String[]
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
 
