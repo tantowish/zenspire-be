@@ -17,7 +17,7 @@ Response Body (Success) :
 
 ```
 {
-	"data": 
+	"data":
 	[
 		{
 			"id": 1,
@@ -65,7 +65,7 @@ Response Body (Success) :
 
 ```
 {
-	"data": 
+	"data":
 	[
 		{
 			"id": 1,
@@ -248,5 +248,50 @@ Response Body (failed) :
 ```
 {
 	"errors": "Journal not found"
+}
+```
+
+### Get Mood Count
+
+Endpoint : GET /api/journals/moods
+
+Request Header :
+
+- Authorization : "Bearer 1o2ie012dk0sakd01"
+
+Response Body (Success) :
+
+```
+{
+    "data": [
+        {
+            "mood": "sangat_baik",
+            "count": 1
+        },
+        {
+            "mood": "baik",
+            "count": 0
+        },
+        {
+            "mood": "biasa",
+            "count": 0
+        },
+        {
+            "mood": "buruk",
+            "count": 0
+        },
+        {
+            "mood": "sangat_buruk",
+            "count": 0
+        }
+    ]
+}
+```
+
+Response Body (Failed) :
+
+```
+{
+	"errors": "unauthorized"
 }
 ```

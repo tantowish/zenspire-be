@@ -186,7 +186,70 @@ Response Body (Failed) :
 }
 ```
 
-### Get Discussion (update)
+### Get List Discussion Liked by User
+
+Endpoint : GET /api/disscusions/liked
+
+Request Header :
+
+- Authorization : "Bearer 1o2ie012dk0sakd01"
+
+Response Body (Success) :
+
+```
+{
+	"data": 
+	[
+		{
+			"id": 1,
+			"user_id": 1,
+			"title": "baik",
+			"body": "lorem epsum",
+			"image": "lorem epsum.png",
+			"created_at": "2024-04-25 15:21:12",
+			"updated_at": "2024-04-25 15:21:12",
+			"_count": {
+				"comment": 12,
+				"discussionLike": 102
+			},
+			"user": {
+				"first_name": "Tantowi",
+				"last_name": null,
+				"isAnonymous": true
+			}
+		},
+		{
+			"id": 2,
+			"user_id": 1,
+			"title": "kurang baik",
+			"body": "lorem epsum",
+			"image": "lorem epsum.png",
+			"created_at": "2024-04-25 15:21:12",
+			"updated_at": "2024-04-25 15:21:12",
+			"_count": {
+				"comment": 12,
+				"discussionLike": 102
+			},
+			"user": {
+				"first_name": "Tantowi",
+				"last_name": null,
+				"isAnonymous": true,
+			}
+		},
+	]
+}
+```
+
+Response Body (Failed) :
+
+```
+{
+	"errors": "User is not found"
+}
+```
+
+
+### Get Discussion
 
 Endpoint : GET /api/disscusions/:id
 
