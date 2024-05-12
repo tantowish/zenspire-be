@@ -5,7 +5,8 @@ import { JournalValidation } from "../validation/journal-validation";
 import { prismaClient } from "../app/database";
 import { ResponseErorr } from "../error/reponse-error";
 import moment from 'moment-timezone';
-
+import { JournalAIResponse, toJournalAIResponse } from "../model/journalAI-model";
+import { runChatJournal } from "../util/gemini-generate";
 
 export class JournalService {
     static async checkExistingJournal(user_id: number, id: number) {
@@ -131,5 +132,58 @@ export class JournalService {
         });
 
         return toMoodCountsResponse(moodCounts)
+    }
+
+    static async journalAI(user: User, id: number): Promise<JournalAIResponse> {
+        const journal = await this.checkExistingJournal(user.id, id)
+
+        const checkExistingJournalAI = await prismaClient.journalAI.findUnique({
+            where:{
+                journal_id: id
+            }
+        })
+
+        if(checkExistingJournalAI){
+            return toJournalAIResponse(checkExistingJournalAI)
+        }
+        else {
+            const response = await runChatJournal(journal.mood, journal.title, journal.question_1, journal.question_2, journal.question_3)
+
+            const journalAI = await prismaClient.journalAI.create({
+                data:{
+                    journal_id: id,
+                    body: response
+                }
+            })
+
+            return toJournalAIResponse(journalAI)
+        }
+    }
+
+    static async updateJournalAI(user: User, id: number): Promise<JournalAIResponse> {
+        const journal = await this.checkExistingJournal(user.id, id)
+
+        const checkExistingJournalAI = await prismaClient.journalAI.findUnique({
+            where:{
+                journal_id: id
+            }
+        })
+
+        if(!checkExistingJournalAI) {
+            throw new ResponseErorr(404, "Journal AI not found")
+        }
+
+        const response = await runChatJournal(journal.mood, journal.title, journal.question_1, journal.question_2, journal.question_3)
+
+        const journalAI = await prismaClient.journalAI.update({
+            where:{
+                journal_id: id
+            },
+            data:{
+                body: response
+            }
+        })
+
+        return toJournalAIResponse(journalAI)
     }
 }

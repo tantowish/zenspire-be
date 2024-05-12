@@ -75,4 +75,26 @@ export class JournalController {
             next(e)
         }
     }
+
+    static async journalAI(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await JournalService.journalAI(req.user as User, parseInt(req.params.id))
+            res.status(200).json({
+                data: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    static async updateJournalAI(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await JournalService.updateJournalAI(req.user as User, parseInt(req.params.id))
+            res.status(200).json({
+                data: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
 }

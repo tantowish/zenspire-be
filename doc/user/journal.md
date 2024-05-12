@@ -295,3 +295,26 @@ Response Body (Failed) :
 	"errors": "unauthorized"
 }
 ```
+
+
+Get Journal Analysis AI
+
+Endpoint : GET /api/journals/:id/analysis
+
+Request Header :
+
+- Authorization : "Bearer 1o2ie012dk0sakd01"
+
+Response Body (Success) :
+
+```
+{
+    "data": {
+		"id": 1,
+		"journal_id": 1,
+		"body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		"created_at": "2024-04-25 15:21:12",
+		"updated_at": "2024-04-25 15:21:12"
+	}
+}
+```

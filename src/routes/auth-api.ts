@@ -22,6 +22,11 @@ apiRouter.get('/api/journals/:id', JournalController.get)
 apiRouter.put('/api/journals/:id', JournalController.update)
 apiRouter.delete('/api/journals/:id', JournalController.delete)
 
+// Journal AI API
+apiRouter.get('/api/journals/:id/analysis', JournalController.journalAI)
+apiRouter.put('/api/journals/:id/analysis', JournalController.updateJournalAI)
+
+
 // Discussion API
 apiRouter.post('/api/discussions/', DiscussionController.create)
 apiRouter.get('/api/discussions/', DiscussionController.list)
