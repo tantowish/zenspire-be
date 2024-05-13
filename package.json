@@ -1,6 +1,9 @@
 {
   "name": "typescript-rest-api",
   "version": "1.0.0",
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seeders/seed.ts"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {

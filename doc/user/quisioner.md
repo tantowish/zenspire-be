@@ -53,8 +53,7 @@ Response Body (Success) :
 }
 ```
 
-
-### Get Quisioner
+### Get Quisioner Severity
 
 Endpoint : GET /api/quisioner/severity
 

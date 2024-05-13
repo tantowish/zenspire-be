@@ -158,7 +158,7 @@ model Journal {
   user_id    Int
   user       User       @relation(fields: [user_id], references: [id])
   mood       Mood
-  title      String     @db.VarChar(20)
+  title      String     @db.VarChar(100)
   question_1 String     @db.Text
   question_2 String     @db.Text
   question_3 String?    @db.Text
