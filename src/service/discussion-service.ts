@@ -40,7 +40,7 @@ export class DiscussionService {
         return toDiscussionResponse(discussion)
     }
 
-    static async list(): Promise<DiscussionResponse[]> {
+    static async list(search?: string): Promise<DiscussionResponse[]> {
         const discussions = await prismaClient.discussion.findMany({
             select: {
                 id: true,
@@ -65,6 +65,20 @@ export class DiscussionService {
                     },
                 },
             },
+            where: search ? {
+                OR: [
+                  {
+                    title: {
+                      contains: search, 
+                    },
+                  },
+                  {
+                    body: {
+                      contains: search, 
+                    },
+                  },
+                ],
+              } : undefined,
             orderBy: {
                 created_at: 'asc',
             },
@@ -73,7 +87,7 @@ export class DiscussionService {
         return toDiscussionArrayFullResponse(discussions)
     }
 
-    static async listByUser(user: User): Promise<DiscussionResponse[]> {
+    static async listByUser(user: User, search?: string): Promise<DiscussionResponse[]> {
         const discussions = await prismaClient.discussion.findMany({
             select: {
                 id: true,
@@ -102,14 +116,20 @@ export class DiscussionService {
                 updated_at: 'asc',
             },
             where: {
-                user_id: user.id
+                user_id: user.id,
+                ...(search && {
+                    OR: [
+                        { title: { contains: search } },
+                        { body: { contains: search } },
+                    ],
+                }),
             }
         });
 
         return toDiscussionArrayFullResponse(discussions)
     }
 
-    static async listLiked(user: User): Promise<DiscussionResponse[]> {
+    static async listLiked(user: User, search?: string): Promise<DiscussionResponse[]> {
         const discussions = await prismaClient.discussion.findMany({
             select: {
                 id: true,
@@ -142,7 +162,13 @@ export class DiscussionService {
                     some: {
                         user_id: user.id
                     }
-                }
+                },
+                ...(search && {
+                    OR: [
+                        { title: { contains: search } },
+                        { body: { contains: search } },
+                    ],
+                }),
             }
         });
 

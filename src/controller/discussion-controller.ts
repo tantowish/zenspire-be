@@ -19,7 +19,7 @@ export class DiscussionController {
 
     static async list(req: UserRequest, res: Response, next: NextFunction) {
         try {
-            const response = await DiscussionService.list()
+            const response = await DiscussionService.list(req.query.search as string)
             res.status(200).json({
                 data: response
             })
@@ -30,7 +30,7 @@ export class DiscussionController {
 
     static async listByUser(req: UserRequest, res: Response, next: NextFunction) {
         try {
-            const response = await DiscussionService.listByUser(req.user as User)
+            const response = await DiscussionService.listByUser(req.user as User, req.query.search as string)
             res.status(200).json({
                 data: response
             })
@@ -52,7 +52,7 @@ export class DiscussionController {
 
     static async listLiked(req: UserRequest, res: Response, next: NextFunction) {
         try {
-            const response = await DiscussionService.listLiked(req.user as User)
+            const response = await DiscussionService.listLiked(req.user as User, req.query.search as string)
             res.status(200).json({
                 data: response
             })

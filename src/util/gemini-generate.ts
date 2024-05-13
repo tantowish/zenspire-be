@@ -49,7 +49,6 @@ export async function runChatJournal(mood: Mood, title: string, question_1: stri
   
     const result = await chat.sendMessage(prompt);
     const response = result.response;
-    console.log(response.text());
-
+    
     return response.text()
   }
