@@ -10,8 +10,14 @@ Request Header :
 
 Query Parameters (Optional):
 
+Date range filter :
+
 - startDate (string): "YYYY-MM-DD". Example: "2024-04-25"
 - endDate (string): "YYYY-MM-DD"
+
+Search filter :
+
+- search(string): "How%20to%20overcome"
 
 Response Body (Success) :
 
@@ -35,54 +41,6 @@ Response Body (Success) :
 			"user_id": 1,
 			"mood": "kurang baik",
 			"title": "kejadian unik 2",
-			"question_1": "lorem epsum",
-			"question_2": "lorem epsum",
-			"question_3": null,
-			"created_at": "2024-04-25 15:21:12",
-			"updated_at": "2024-04-25 15:21:12"
-		},
-	]
-}
-```
-
-Response Body (Failed) :
-
-```
-{
-	"errors": "User is not found"
-}
-```
-
-### Get List Journal by Date
-
-Endpoint : GET /api/journals?date='yyyy-dd-mm'
-
-Request Header :
-
-- Authorization : "Bearer 1o2ie012dk0sakd01"
-
-Response Body (Success) :
-
-```
-{
-	"data":
-	[
-		{
-			"id": 1,
-			"user_id": 1,
-			"mood": "baik",
-			"title": "kejadian unik",
-			"question_1": "lorem epsum",
-			"question_2": "lorem epsum",
-			"question_3": "lorem epsum",
-			"created_at": "2024-04-25 15:21:12",
-			"updated_at": "2024-04-25 15:21:12"
-		},
-		{
-			"id": 2,
-			"user_id": 1,
-			"mood": "kurang baik",
-			"title": "kejadian unik",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": null,
@@ -295,7 +253,6 @@ Response Body (Failed) :
 	"errors": "unauthorized"
 }
 ```
-
 
 Get Journal Analysis AI
 

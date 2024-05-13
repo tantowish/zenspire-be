@@ -10,7 +10,7 @@ Request Header :
 
 Query Parameters (Optional):
 
-- search(string): "How to overcome"
+- search(string): "How%20to%20overcome"
 
 Response Body (Success) :
 
@@ -76,7 +76,7 @@ Request Header :
 
 Query Parameters (Optional):
 
-- search(string): "How to overcome"
+- search(string): "How%20to%20overcome"
 
 Response Body (Success) :
 
@@ -142,7 +142,7 @@ Request Header :
 
 Query Parameters (Optional):
 
-- search(string): "How to overcome"
+- search(string): "How%20to%20overcome"
 
 Response Body (Success) :
 

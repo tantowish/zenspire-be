@@ -21,7 +21,7 @@ export class JournalController {
         try {
             const startDate = new Date(req.query.startDate as string);
             const endDate = new Date(req.query.endDate as string);
-            const response = await JournalService.list(req.user as User, startDate, endDate)
+            const response = await JournalService.list(req.user as User, startDate, endDate, req.query.search as string)
             res.status(200).json({
                 data: response
             })

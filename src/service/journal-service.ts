@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Mood, User } from "@prisma/client";
 import { CreateJournalRequest, JournalResponse, MoodCountResponse, UpdateJournalRequest, toJournalArrayResponse, toJournalResponse, toMoodCountsResponse } from "../model/journal-model";
 import { Validation } from "../validation/validation";
 import { JournalValidation } from "../validation/journal-validation";
@@ -42,12 +42,17 @@ export class JournalService {
         return toJournalResponse(journal)
     }
 
-    static async list(user: User, startDate: Date, endDate: Date): Promise<JournalResponse[]> {
+    static async list(user: User, startDate: Date, endDate: Date, search?: string): Promise<JournalResponse[]> {
         let journals;
         if(isNaN(startDate.getDate()) || isNaN(endDate.getDate())){
             journals = await prismaClient.journal.findMany({
                 where: {
-                    user_id: user.id
+                    user_id: user.id,
+                    ...(search && {
+                        OR: [
+                            { title: { contains: search } },
+                        ],
+                    }),
                 }
             })
         }
