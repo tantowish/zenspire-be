@@ -2,7 +2,7 @@
 
 ### Get Quisioner
 
-Endpoint : GET /api/quisioner
+Endpoint : GET /api/quisioners
 
 Request Header :
 
@@ -55,7 +55,7 @@ Response Body (Success) :
 
 ### Get Quisioner Severity
 
-Endpoint : GET /api/quisioner/severity
+Endpoint : GET /api/quisioners/severity
 
 Request Header :
 
@@ -73,11 +73,54 @@ Response Body (Success) :
 
 ### Create Quisioner
 
-Endpoint : POST /api/quisioner
+Endpoint : POST /api/quisioners
 
-Request Header :
+Request Header :	
 
 - Authorization : "Bearer 1o2ie012dk0sakd01"
+
+Request Body :
+
+```
+[
+	{
+		"question_id": 1,
+		"severity": 4
+	},
+	{
+		"question_id": 2,
+		"severity": 3
+	},
+	{
+		"question_id": 3,
+		"severity": 5
+	},
+	{
+		"question_id": 4,
+		"severity": 4
+	},
+	{
+		"question_id": 5,
+		"severity": 2
+	},
+	{
+		"question_id": 6,
+		"severity": 1
+	},
+	{
+		"question_id": 7,
+		"severity": 1
+	},
+	{
+		"question_id": 8,
+		"severity": 2
+	},
+	{
+		"question_id": 9,
+		"severity": 2
+	},
+]
+```
 
 Response Body (Success) :
 
