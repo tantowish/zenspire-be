@@ -1,6 +1,6 @@
 # Zenspire
 
-Zenspire is a mental health app that supports global goals for health, education, and gender equality. Zenspire helps individuals improve their well-being while contributing to Sustainable Development Goals 3 (Good Health and Well-being), 4 (Quality Education), and 5 (Gender Equality).
+Zenspire is a cutting-edge mental health companion app designed to provide essential support for individuals seeking mental health care but who may be hesitant or unable to see a psychologist. By leveraging technology, Zenspire makes mental health resources accessible and promotes overall well-being, contributing to key Sustainable Development Goals (SDGs). 
 
 ## Getting started
 
