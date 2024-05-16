@@ -6,8 +6,8 @@ import { prismaClient } from "../app/database";
 import { ResponseErorr } from "../error/reponse-error";
 import moment from 'moment-timezone';
 import { JournalAIResponse, toJournalAIResponse } from "../model/journalAI-model";
-import { runChatJournal } from "../util/chatgpt-generate";
-// import { runChatJournal } from "../util/gemini-generate";
+// import { runChatJournal } from "../util/chatgpt-generate";
+import { runChatJournal } from "../util/gemini-generate";
 
 export class JournalService {
     static async checkExistingJournal(user_id: number, id: number) {
