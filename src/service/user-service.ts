@@ -82,7 +82,12 @@ export class UserService {
     }
 
     static async get(user: User): Promise<UserResponse> {
-        return toUserResponse(user)
+        const userFetch = await prismaClient.user.findUnique({
+            where: {
+                id: user.id
+            }
+        })
+        return toUserResponse(userFetch as User)
     }
 
     static async update(user: User, req: UpdateUserRequest): Promise<UserResponse> {

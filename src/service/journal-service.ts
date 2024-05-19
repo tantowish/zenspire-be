@@ -8,6 +8,7 @@ import moment from 'moment-timezone';
 import { JournalAIResponse, toJournalAIResponse } from "../model/journalAI-model";
 // import { runChatJournal } from "../util/chatgpt-generate";
 import { runChatJournal } from "../util/gemini-generate";
+import { ExpMapping } from "../util/exp-mapping";
 
 export class JournalService {
     static async checkExistingJournal(user_id: number, id: number) {
@@ -38,6 +39,17 @@ export class JournalService {
 
         const journal = await prismaClient.journal.create({
             data: data
+        })
+
+        await prismaClient.user.update({
+            where: {
+                id: user.id
+            },
+            data: {
+                experience_points: {
+                    increment: ExpMapping.createDiscussion
+                }
+            }
         })
 
         return toJournalResponse(journal)

@@ -31,16 +31,6 @@ enum Gender {
   L
 }
 
-model Exp {
-  id                Int      @id @default(autoincrement())
-  name              String   @db.VarChar(255)
-  experience_points Int
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt
-
-  @@map("exp")
-}
-
 model User {
   id                Int              @id @default(autoincrement())
   first_name        String           @db.VarChar(255)

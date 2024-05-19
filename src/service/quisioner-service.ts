@@ -1,6 +1,7 @@
 import { PHQ9, User } from "@prisma/client";
 import { CreateQuisionerRequest, QuisionerResponse, toQuisionerResponseArray } from "../model/quisioner-model";
 import { prismaClient } from "../app/database";
+import { ExpMapping } from "../util/exp-mapping";
 
 export class QuisionerService {
     static async getPHQ9(id: number): Promise<PHQ9[]> {
@@ -28,6 +29,17 @@ export class QuisionerService {
         })
 
         const quisioners = await this.getPHQ9(user.id)
+
+        await prismaClient.user.update({
+            where: {
+                id: user.id
+            },
+            data: {
+                experience_points: {
+                    increment: ExpMapping.depressionTest
+                }
+            }
+        })
 
         return toQuisionerResponseArray(quisioners)
     } 

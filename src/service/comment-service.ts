@@ -4,6 +4,7 @@ import { ResponseErorr } from "../error/reponse-error";
 import { Validation } from "../validation/validation";
 import { CommentValidation } from "../validation/comment-validation";
 import { prismaClient } from "../app/database";
+import { ExpMapping } from "../util/exp-mapping";
 
 export class CommentService {
     static async checkExistingDiscussion(discussionId: number) {
@@ -53,6 +54,17 @@ export class CommentService {
 
         const comment = await prismaClient.comment.create({
             data: data
+        })
+
+        await prismaClient.user.update({
+            where: {
+                id: user.id
+            },
+            data: {
+                experience_points: {
+                    increment: ExpMapping.commentDiscussion
+                }
+            }
         })
 
         return toCommentResponse(comment)

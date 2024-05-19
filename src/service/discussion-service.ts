@@ -7,6 +7,7 @@ import { ResponseErorr } from "../error/reponse-error";
 import { UserService } from "./user-service";
 import moment from "moment-timezone";
 import { DiscussionPopular } from "../types/discussion-types";
+import { ExpMapping } from "../util/exp-mapping";
 
 export class DiscussionService {
     static async checkExistingDiscussion(user_id: number, id: number) {
@@ -35,6 +36,17 @@ export class DiscussionService {
 
         const discussion = await prismaClient.discussion.create({
             data: data
+        })
+
+        await prismaClient.user.update({
+            where: {
+                id: user.id
+            },
+            data: {
+                experience_points: {
+                    increment: ExpMapping.createDiscussion
+                }
+            }
         })
 
         return toDiscussionResponse(discussion)
