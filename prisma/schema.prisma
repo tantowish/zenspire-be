@@ -48,7 +48,6 @@ model User {
   comment           Comment[]
   journal           Journal[]
   discussionLike    DiscussionLike[]
-  PHQ9              PHQ9[]
   post              Post[]
   UserData          UserData?
 
@@ -62,6 +61,7 @@ model UserData {
   gender           Gender
   birthday         DateTime
   health_condition String[]
+  preferences      String[]
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
 
@@ -69,14 +69,14 @@ model UserData {
 }
 
 model Practitioner {
-  id              Int     @id @default(autoincrement())
-  user_id         Int     @unique
-  user            User    @relation(fields: [user_id], references: [id])
-  university      String? @db.VarChar(255)
-  no_izin_praktek String? @db.VarChar(255)
-  no_hp           String  @db.VarChar(255)
-  nik             String? @db.VarChar(255)
-  alamat_praktek  String? @db.VarChar(255)
+  id             Int     @id @default(autoincrement())
+  user_id        Int     @unique
+  user           User    @relation(fields: [user_id], references: [id])
+  university     String? @db.VarChar(255)
+  no_str         String? @db.VarChar(255)
+  no_hp          String  @db.VarChar(255)
+  nik            String? @db.VarChar(16)
+  alamat_praktek String? @db.Text
 
   @@map("practitioners")
 }
@@ -86,6 +86,7 @@ model ChatAI {
   user_id      Int      @unique
   user         User     @relation(fields: [user_id], references: [id])
   history_chat Json
+  ai_analisis  String?  @db.Text
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
 
@@ -96,6 +97,7 @@ model Discussion {
   id             Int              @id @default(autoincrement())
   user_id        Int
   user           User             @relation(fields: [user_id], references: [id])
+  kategori       String[]
   title          String           @db.VarChar(255)
   body           String           @db.Text
   image          String?          @db.VarChar(255)
@@ -151,7 +153,8 @@ model Journal {
   title      String     @db.VarChar(100)
   question_1 String     @db.Text
   question_2 String     @db.Text
-  question_3 String?    @db.Text
+  question_3 String     @db.Text
+  question_4 String     @db.Text
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt
   JournalAI  JournalAI?
@@ -168,13 +171,4 @@ model JournalAI {
   updated_at DateTime @updatedAt
 
   @@map("journal_ai")
-}
-
-model PHQ9 {
-  id          Int      @id @default(autoincrement())
-  user_id     Int
-  user        User     @relation(fields: [user_id], references: [id])
-  question_id Int
-  severity    Int
-  created_at  DateTime @default(now())
 }
