@@ -10,7 +10,8 @@ export type JournalResponse = {
     title: string
     question_1: string
     question_2: string
-    question_3?: string
+    question_3: string
+    question_4: string
     created_at: string
     updated_at: string
 }
@@ -20,7 +21,8 @@ export type CreateJournalRequest = {
     title: string
     question_1: string
     question_2: string
-    question_3?: string
+    question_3: string
+    question_4: string
 }
 
 export type UpdateJournalRequest = {
@@ -29,7 +31,8 @@ export type UpdateJournalRequest = {
     title: string
     question_1: string
     question_2: string
-    question_3?: string
+    question_3: string
+    question_4: string
 }
 
 export type MoodCountResponse = {
@@ -45,7 +48,8 @@ export function toJournalResponse(journal: Journal): JournalResponse {
         title: journal.title,
         question_1: journal.question_1,
         question_2: journal.question_2,
-        question_3: journal.question_3!,
+        question_3: journal.question_3,
+        question_4: journal.question_4,
         created_at: moment(journal.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'), 
         updated_at: moment(journal.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
     }   
@@ -59,7 +63,8 @@ export function toJournalArrayResponse(journals: Journal[]): JournalResponse[] {
         title: journal.title,
         question_1: journal.question_1,
         question_2: journal.question_2,
-        question_3: journal.question_3!,
+        question_3: journal.question_3,
+        question_4: journal.question_4,
         created_at: moment(journal.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'), 
         updated_at: moment(journal.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
     }));

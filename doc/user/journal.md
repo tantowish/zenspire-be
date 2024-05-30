@@ -28,22 +28,24 @@ Response Body (Success) :
 		{
 			"id": 1,
 			"user_id": 1,
-			"mood": "baik",
+			"mood": "minimal",
 			"title": "kejadian unik",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
 			"question_3": "lorem epsum",
+			"question_4": "lorem epsum",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12"
 		},
 		{
 			"id": 2,
 			"user_id": 1,
-			"mood": "kurang baik",
+			"mood": "berat",
 			"title": "kejadian unik 2",
 			"question_1": "lorem epsum",
 			"question_2": "lorem epsum",
-			"question_3": null,
+			"question_3": "lorem epsum",
+			"question_4": "lorem epsum",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12"
 		},
@@ -74,11 +76,12 @@ Response Body (Success) :
 	"data": {
 		"id": 1,
 		"user_id",
-		"mood": "baik",
+		"mood": "minimal",
 		"title": "kejadian unik",
 		"question_1": "lorem epsum",
 		"question_2": "lorem epsum",
 		"question_3": "lorem epsum",
+		"question_4": "lorem epsum",
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 15:21:12"
 	}
@@ -105,11 +108,12 @@ Request Body :
 
 ```
 {
-	"mood": "baik",
+	"mood": "minimal",
 	"title": "kejadian unik",
 	"question_1": "lorem epsum",
 	"question_2": "lorem epsum",
 	"question_3": "lorem epsum",
+	"question_4": "lorem epsum",
 }
 ```
 
@@ -120,11 +124,12 @@ Response Body (success) :
 	"data": {
 		"id": 1,
 		"user_id": 1,
-		"mood": "baik",
+		"mood": "minimal",
 		"title": "kejadian unik",
 		"question_1": "lorem epsum",
 		"question_2": "lorem epsum",
 		"question_3": "lorem epsum",
+		"question_4": "lorem epsum",
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 15:21:12"
 	}
@@ -151,11 +156,12 @@ Request Body :
 
 ```
 {
-	"mood": "baik",
+	"mood": "minimal",
 	"title": "kejadian unik",
 	"question_1": "lorem epsum edit",
 	"question_2": "lorem epsum edit",
 	"question_3": "lorem epsum",
+	"question_4": "lorem epsum",
 }
 ```
 
@@ -166,11 +172,12 @@ Response Body (success) :
 	"data": {
 		"id": 1,
 		"user_id": 1,
-		"mood": "baik",
+		"mood": "minimal",
 		"title": "kejadian unik",
 		"question_1": "lorem epsum edit",
 		"question_2": "lorem epsum edit",
 		"question_3": "lorem epsum",
+		"question_4": "lorem epsum",
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 15:21:12"
 	}
@@ -223,23 +230,23 @@ Response Body (Success) :
 {
     "data": [
         {
-            "mood": "sangat_baik",
+            "mood": "minimal",
             "count": 1
         },
         {
-            "mood": "baik",
+            "mood": "ringan",
             "count": 0
         },
         {
-            "mood": "biasa",
+            "mood": "sedang",
             "count": 0
         },
         {
-            "mood": "buruk",
+            "mood": "berat",
             "count": 0
         },
         {
-            "mood": "sangat_buruk",
+            "mood": "ekstrem",
             "count": 0
         }
     ]

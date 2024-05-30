@@ -7,7 +7,8 @@ export class JournalValidation {
         title: z.string().min(1).max(100),
         question_1: z.string().min(1),
         question_2: z.string().min(1),
-        question_3: z.string().optional(),
+        question_3: z.string().min(1),
+        question_4: z.string().min(1),
     })
 
     static readonly UPDATE: ZodType = z.object({
@@ -16,6 +17,7 @@ export class JournalValidation {
         title: z.string().min(1).max(100),
         question_1: z.string().min(1),
         question_2: z.string().min(1),
-        question_3: z.string().optional(),
+        question_3: z.string().min(1),
+        question_4: z.string().min(1),
     })
 }   

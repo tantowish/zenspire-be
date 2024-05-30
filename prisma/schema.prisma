@@ -19,11 +19,11 @@ enum Role {
 }
 
 enum Mood {
-  sangat_baik
-  baik
-  biasa
-  buruk
-  sangat_buruk
+  ekstrem
+  berat
+  sedang
+  ringan
+  minimal
 }
 
 enum Gender {
@@ -97,7 +97,7 @@ model Discussion {
   id             Int              @id @default(autoincrement())
   user_id        Int
   user           User             @relation(fields: [user_id], references: [id])
-  kategori       String[]
+  category       String[]
   title          String           @db.VarChar(255)
   body           String           @db.Text
   image          String?          @db.VarChar(255)

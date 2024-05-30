@@ -9,6 +9,7 @@ export type DiscussionResponse = {
     id: number,
     user_id: number,
     title: string,
+    category: string[],
     body: string,
     image?: string,
     created_at: string,
@@ -24,6 +25,7 @@ export type DiscussionFullResponse = {
     id: number,
     user_id: number,
     title: string,
+    category: string[],
     body: string,
     image?: string,
     created_at: string,
@@ -44,6 +46,7 @@ export type DiscussionDetailResponse = {
     id: number,
     user_id: number,
     title: string,
+    category: string[],
     body: string,
     image?: string,
     created_at: string,
@@ -64,12 +67,14 @@ export type DiscussionDetailResponse = {
 export type CreateDiscussionRequest = {
     title: string,
     body: string,
+    category: string[],
     image?: string
 }
 
 export type UpdateDiscussionRequest = {
     id: number
     title: string,
+    category: string[],
     body: string,
     image?: string
 }
@@ -79,6 +84,7 @@ export function toDiscussionResponse(discussion: Discussion): DiscussionResponse
         id: discussion.id,
         user_id: discussion.user_id,
         title: discussion.title,
+        category: discussion.category,
         body: discussion.body,
         image: discussion.image!,
         created_at: moment(discussion.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
@@ -97,6 +103,7 @@ export function toDiscussionArrayFullResponse(discussions: DiscussionWithCount[]
     return discussions.map((discussion) => ({
         id: discussion.id,
         user_id: discussion.user_id,
+        category: discussion.category,
         title: discussion.title,
         body: discussion.body,
         image: discussion.image!, // Handle optional image
@@ -117,6 +124,7 @@ export function toDiscussionArrayFullResponsePopular(discussions: DiscussionPopu
         id: discussion.id,
         user_id: discussion.user_id,
         title: discussion.title,
+        category: discussion.category,
         body: discussion.body,
         image: discussion.image!, // Handle optional image
         created_at: moment(discussion.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
@@ -139,6 +147,7 @@ export function toDiscussionDetailResponse(discussion: DiscussionDetail): Discus
         id: discussion.id,
         user_id: discussion.user_id,
         title: discussion.title,
+        category: discussion.category,
         body: discussion.body,
         image: discussion.image!,
         created_at: moment(discussion.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
