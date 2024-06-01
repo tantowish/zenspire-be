@@ -165,7 +165,7 @@ export class JournalService {
             return toJournalAIResponse(checkExistingJournalAI)
         }
         else {
-            const response = await runChatJournal(journal.mood, journal.title, journal.question_1, journal.question_2, journal.question_3)
+            const response = await runChatJournal(journal.mood, journal.title, journal.question_1, journal.question_2, journal.question_3, journal.question_4)
 
             const journalAI = await prismaClient.journalAI.create({
                 data:{
@@ -191,7 +191,7 @@ export class JournalService {
             throw new ResponseErorr(404, "Journal AI not found")
         }
 
-        const response = await runChatJournal(journal.mood, journal.title, journal.question_1, journal.question_2, journal.question_3)
+        const response = await runChatJournal(journal.mood, journal.title, journal.question_1, journal.question_2, journal.question_3, journal.question_4)
 
         const journalAI = await prismaClient.journalAI.update({
             where:{
