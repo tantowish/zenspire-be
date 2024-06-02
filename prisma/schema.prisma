@@ -60,7 +60,6 @@ model UserData {
   user             User     @relation(fields: [user_id], references: [id])
   gender           Gender
   birthday         DateTime
-  health_condition String[]
   preferences      String[]
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt

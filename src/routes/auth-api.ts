@@ -5,7 +5,7 @@ import { JournalController } from '../controller/journal-controller'
 import { DiscussionController } from '../controller/discussion-controller'
 import { CommentController } from '../controller/comment-controller'
 import { UserDataController } from '../controller/userData-controller'
-import { QuisionerController } from '../controller/quisioner-controller'
+import { ChatbotController } from '../controller/chatbot-controller'
 
 export const apiRouter = express.Router()
 
@@ -19,12 +19,6 @@ apiRouter.patch('/api/users', UserController.update)
 apiRouter.post('/api/user_data', UserDataController.create)
 apiRouter.get('/api/user_data', UserDataController.get)
 apiRouter.put('/api/user_data', UserDataController.update)
-
-// Quisioner API
-apiRouter.post('/api/quisioners', QuisionerController.create)
-apiRouter.get('/api/quisioners', QuisionerController.get)
-apiRouter.get('/api/quisioners/severity', QuisionerController.getSeverity)
-
 
 // Journals API
 apiRouter.post('/api/journals/', JournalController.create)
@@ -57,5 +51,10 @@ apiRouter.get('/api/discussions/:discussionId/comments', CommentController.list)
 apiRouter.get('/api/discussions/:discussionId/comments/:commentId', CommentController.get)
 apiRouter.put('/api/discussions/:discussionId/comments/:commentId', CommentController.update)
 apiRouter.delete('/api/discussions/:discussionId/comments/:commentId', CommentController.delete)
+
+// Chatbot API
+apiRouter.post('/api/chatbot', ChatbotController.createResponse)
+apiRouter.get('/api/chatbot', ChatbotController.get)
+apiRouter.get('/api/chatbot/resume', ChatbotController.getResume)
 
 

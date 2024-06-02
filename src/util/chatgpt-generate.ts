@@ -1,4 +1,5 @@
 import { Mood } from "@prisma/client";
+import { JsonValue } from "@prisma/client/runtime/library";
 import { OpenAI } from "openai";
 
 const openai = new OpenAI({
@@ -14,4 +15,8 @@ export async function runChatJournal(mood: Mood, title: string, question_1: stri
     })
 
     return chatCompletion.choices[0].message.content!
+}
+
+export async function runChatCompletion(history_chat: JsonValue){
+    
 }

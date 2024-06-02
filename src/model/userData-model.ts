@@ -7,7 +7,6 @@ export type UserDataResponse = {
     user_id: number,
     gender: Gender,
     birthday: string,
-    health_condition: string[],
     preferences: string[],
     created_at: string,
     updated_at: string,
@@ -16,7 +15,7 @@ export type UserDataResponse = {
 export type UserDataRequest = {
     gender: Gender,
     birthday: string,
-    health_condition: string[]
+    preferences: string[]
 }
 
 export function toUserDataResponse(userData: UserData): UserDataResponse {
@@ -25,7 +24,6 @@ export function toUserDataResponse(userData: UserData): UserDataResponse {
         user_id: userData.user_id,
         gender: userData.gender,
         birthday: moment(userData.birthday).tz(timezone).format('YYYY-MM-DD'),
-        health_condition: userData.health_condition,
         preferences: userData.preferences,
         created_at: moment(userData.created_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
         updated_at: moment(userData.updated_at).tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
