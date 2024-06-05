@@ -216,7 +216,7 @@ Response Body (failed) :
 }
 ```
 
-### Get Mood Count
+### Get Mood Anxiety level
 
 Endpoint : GET /api/journals/moods
 

@@ -17,7 +17,7 @@ Response Body (Success) :
 		"user_id": 1,
 		"gender": "P",
 		"birthday": "2003-07-07",
-		"health_condition": ["Asma", "Penyakit Jantung"],
+		"preferences": ["Pengalaman", "Edukasi"],
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 15:21:12"
 	}
@@ -46,7 +46,7 @@ Request Body :
 {
 	"gender": P,
 	"birthday": "2003-07-07",
-	"health_condition": ["Asma", "Penyakit Jantung"]
+	"preferences": ["Pengalaman", "Edukasi"],
 }
 ```
 
@@ -59,7 +59,7 @@ Response Body (success) :
 		"user_id": 1,
 		"gender": "P",
 		"birthday": "2003-07-07",
-		"health_condition": ["Asma", "Penyakit Jantung"],
+		"preferences": ["Pengalaman", "Edukasi"],
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 15:21:12"
 	}
@@ -88,7 +88,7 @@ Request Body :
 {
 	"gender": "P",
 	"birthday": "2003-07-07",
-	"health_condition": ["Asma", "Penyakit Jantung", "Edit Lainnya"]
+	"preferences": ["Pengalaman", "Edukasi"],
 }
 ```
 
@@ -101,7 +101,7 @@ Response Body (success) :
 		"user_id": 1,
 		"gender": P,
 		"birthday": "2003-07-07",
-		"health_condition": ["Asma", "Penyakit Jantung", "Edit Lainnya"],
+		"preferences": ["Pengalaman", "Edukasi"],
 		"created_at": "2024-04-25 15:21:12",
 		"updated_at": "2024-04-25 21:21:12"
 	}

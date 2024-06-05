@@ -75,7 +75,7 @@ export class ChatbotService {
 
         const historyArray = Array.isArray(chatbot.history_chat) ? chatbot.history_chat : JSON.parse(chatbot.history_chat as string);
 
-        const response = await runChatCompletion(historyArray, "Buatkan analisis dengan format berikut:\n\npenjelasan keseluruhan hasil percakapan, buat 1 paragraf saja\nKegiatan yang perlu dilakukan :\n- kegiatan 1\n- kegiatan 2\n- seterusnya jika ada\nHal yang perlu dihindari :\n- hindari 1\n hindari 2\n dan seterusnya jika ada")
+        const response = await runChatCompletion(historyArray, "Buatkan analisis untuk user dengan format berikut:\n\npenjelasan keseluruhan hasil percakapan, buat 1 paragraf saja\nKegiatan yang perlu dilakukan :\n- kegiatan 1\n- kegiatan 2\n- seterusnya jika ada\nHal yang perlu dihindari :\n- hindari 1\n hindari 2\n dan seterusnya jika ada")
 
         await prismaClient.chatAI.update({
             where: { user_id: user.id },
