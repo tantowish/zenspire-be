@@ -87,4 +87,17 @@ export class ChatbotService {
 
         return {resume: response}
     }
+
+    static async reset(user: User): Promise<ChatbotResponse>{
+        await this.checkChatbot(user.id)
+
+        const chatbotUpdated = await prismaClient.chatAI.update({
+            where: { user_id: user.id },
+            data: { 
+                history_chat: [],
+            },
+        });
+
+        return toChatbotResponse(chatbotUpdated)
+    }
 }

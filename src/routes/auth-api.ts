@@ -56,5 +56,6 @@ apiRouter.delete('/api/discussions/:discussionId/comments/:commentId', CommentCo
 apiRouter.post('/api/chatbot', ChatbotController.createResponse)
 apiRouter.get('/api/chatbot', ChatbotController.get)
 apiRouter.get('/api/chatbot/resume', ChatbotController.getResume)
+apiRouter.get('/api/chatbot/reset', ChatbotController.reset )
 
 

@@ -38,4 +38,14 @@ export class ChatbotController {
             next(e)
         }
     }
+    static async reset(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await ChatbotService.reset(req.user as User)
+            res.status(200).json({
+                data: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
 }
