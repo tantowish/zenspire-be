@@ -1,8 +1,17 @@
-# Zenspire
+# ✨Zenspire✨
 
-Zenspire is a cutting-edge mental health companion app designed to provide essential support for individuals seeking mental health care but who may be hesitant or unable to see a psychologist. By leveraging technology, Zenspire makes mental health resources accessible and promotes overall well-being, contributing to key Sustainable Development Goals (SDGs). 
+<div align="center">
+  <a href="https://github.com/tantowish/zenspire-be">
+    <img src="https://raw.githubusercontent.com/tantowish/toshka-images/main/zenspire/mockup%20handphone.png" alt="Logo" width="80" height="80">
+  </a>
+</div>
 
-## Getting started
+
+## ℹ️About
+
+Zenspire is a revolutionary mental health companion app that transforms how individuals access mental health care. Zenspire harnesses the power of AI, cloud computing, real-time data, and advanced large language models (LLMs) to deliver instant, personalized support. By making cutting-edge mental health resources universally accessible, Zenspire not only enhances well-being but also champions key Sustainable Development Goals (SDGs). Get ready to redefine your mental wellness journey with Zenspire!
+
+## 🔧Getting started
 
 **Clone**
 
@@ -33,13 +42,45 @@ npx prisma migrate dev
 **Running Service**
 
 ```
-nodemon run
+npm run dev
 ```
 
-## Database ERD
+## 🛠️Technologies (Backend)
+
+**TypeScript** : A statically typed superset of JavaScript used for building scalable and maintainable back-end applications.
+
+**Express** : A minimal and flexible Node.js framework for handling HTTP requests and building web APIs.
+
+**Large Language Model (LLM)** : Advanced AI technology for natural language understanding and generation, used in chatbots and text analysis.
+
+## 📁Project Structure
+
+```
+|-- doc/                # API Documentation folder
+|-- prisma/             # Database related folder
+|-- src/
+|   |-- app/
+|       |-- app.ts      # Main server code
+|       |-- controller/ # Controller using service
+|       |-- error/      # Error handler logic
+|       |-- middleware/ # Middleware
+|       |-- model/      # Model type for database
+|       |-- routes/     # Routes logic
+|       |-- service/    # Service Application logic
+|       |-- types/      # Extended type for model
+|       |-- util/       # Utilities helper
+|       |-- validation/ # Request validation
+|-- test/               # Testing folder
+```
+
+## 🛢Database ERD
 
 https://drive.google.com/file/d/1hl_IAd1Dvs4QXhHkOvIllhAfTvu_aI7c/view?usp=sharing
 
-## API Spec Documentation
+## 📓API Spec Documentation
 
 https://github.com/tantowish/zenify-be/tree/main/doc
+
+## 🧾License
+
+This project is licensed under the. You are free to use, modify, and distribute the code as you see fit.
