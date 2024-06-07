@@ -1,11 +1,17 @@
+
 # ✨Zenspire✨
 
 <div align="center">
   <a href="https://github.com/tantowish/zenspire-be">
-    <img src="https://raw.githubusercontent.com/tantowish/toshka-images/main/zenspire/mockup%20handphone.png" alt="Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/tantowish/toshka-images/main/zenspire/mockup%20handphone.png" alt="Logo" width="700" >
   </a>
 </div>
 
+<div align="center">
+    <a href="" style="text-decoration: none;">
+        Official Website
+    </a>
+</div>
 
 ## ℹ️About
 
