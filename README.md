@@ -59,7 +59,7 @@ npm run dev
 
 **Large Language Model (LLM)** : Advanced AI technology for natural language understanding and generation, used in chatbots and text analysis.
 
-## 📁Project Structure
+## 📁Project Structure (Backend)
 
 ```
 |-- doc/                # API Documentation folder
@@ -86,6 +86,18 @@ https://drive.google.com/file/d/1hl_IAd1Dvs4QXhHkOvIllhAfTvu_aI7c/view?usp=shari
 ## 📓API Spec Documentation
 
 https://github.com/tantowish/zenify-be/tree/main/doc
+
+## 🗄️Backend Application
+
+https://github.com/tantowish/zenspire-be
+
+## 📱Frontend Application
+
+https://github.com/1langit/Zenspire
+
+## 🌐Web Application (Landing page)
+
+https://github.com/tantowish/zenspire-web
 
 ## 🧾License
 
