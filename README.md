@@ -1,4 +1,3 @@
-
 # ✨Zenspire✨
 
 <div align="center">
@@ -101,4 +100,4 @@ https://github.com/tantowish/zenspire-web
 
 ## 🧾License
 
-This project is licensed under the. You are free to use, modify, and distribute the code as you see fit.
+This project is licensed under the [MIT](https://github.com/tantowish/zenspire-be/blob/main/MIT-LICENSE.txt) License. You are free to use, modify, and distribute the code as you see fit.
