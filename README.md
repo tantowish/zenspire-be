@@ -86,17 +86,23 @@ https://drive.google.com/file/d/1hl_IAd1Dvs4QXhHkOvIllhAfTvu_aI7c/view?usp=shari
 
 https://github.com/tantowish/zenify-be/tree/main/doc
 
-## 🗄️Backend Application
+## 📱Zenspire Application
+
+### 🗄️Backend Application
 
 https://github.com/tantowish/zenspire-be
 
-## 📱Frontend Application
+### 💡Frontend Application
 
 https://github.com/1langit/Zenspire
 
-## 🌐Web Application (Landing page)
+### 🌐Web Application (Landing page)
 
 https://github.com/tantowish/zenspire-web
+
+### 🎨Figma Design
+
+https://www.figma.com/design/NPBM34I6tqKKPGqMsga6K4/Zenspire?m=dev&node-id=105-260&t=tpaQAzVewqxbzoYl-1
 
 ## 🧾License
 
