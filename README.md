@@ -92,7 +92,7 @@ https://github.com/tantowish/zenify-be/tree/main/doc
 
 https://github.com/tantowish/zenspire-be
 
-### 💡Frontend Application
+### 💡Mobile Application
 
 https://github.com/1langit/Zenspire
 
