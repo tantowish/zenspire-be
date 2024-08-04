@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "journals" ALTER COLUMN "title" SET DATA TYPE VARCHAR(100);
