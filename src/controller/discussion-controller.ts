@@ -19,7 +19,11 @@ export class DiscussionController {
 
     static async list(req: UserRequest, res: Response, next: NextFunction) {
         try {
-            const response = await DiscussionService.list(req.query.search as string)
+            const search = req.query.search as string
+            const categoryParam = req.query.category as string;
+            const categories = categoryParam ? categoryParam.split(',') : [];
+            console.log(categories)
+            const response = await DiscussionService.list(search, categories)
             res.status(200).json({
                 data: response
             })

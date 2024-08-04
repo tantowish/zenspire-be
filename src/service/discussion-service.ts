@@ -52,7 +52,26 @@ export class DiscussionService {
         return toDiscussionResponse(discussion)
     }
 
-    static async list(search?: string): Promise<DiscussionResponse[]> {
+    static async list(search?: string, category?: string[]): Promise<DiscussionResponse[]> {
+        const orConditions = [];
+    
+        if (search) {
+            orConditions.push(
+                { title: { contains: search } },
+                { body: { contains: search } }
+            );
+        }
+    
+        const whereCondition: any = {};
+    
+        if (orConditions.length > 0) {
+            whereCondition.OR = orConditions;
+        }
+    
+        if (category && category.length > 0) {
+            whereCondition.category = { hasSome: category };
+        }
+    
         const discussions = await prismaClient.discussion.findMany({
             select: {
                 id: true,
@@ -78,27 +97,14 @@ export class DiscussionService {
                     },
                 },
             },
-            where: search ? {
-                OR: [
-                  {
-                    title: {
-                      contains: search, 
-                    },
-                  },
-                  {
-                    body: {
-                      contains: search, 
-                    },
-                  },
-                ],
-              } : undefined,
+            where: Object.keys(whereCondition).length > 0 ? whereCondition : undefined,
             orderBy: {
                 created_at: 'asc',
             },
         });
-
-        return toDiscussionArrayFullResponse(discussions)
-    }
+    
+        return toDiscussionArrayFullResponse(discussions);
+    }    
 
     static async listByUser(user: User, search?: string): Promise<DiscussionResponse[]> {
         const discussions = await prismaClient.discussion.findMany({
