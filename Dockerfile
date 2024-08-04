@@ -9,6 +9,7 @@ COPY package.json ./
 RUN yarn install --verbose
 
 # Generate prisma client
+COPY prisma ./prisma/
 RUN yarn prisma generate
 
 # Copy source files and build the application with verbose output
