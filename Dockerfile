@@ -1,31 +1,33 @@
-FROM node:20.11.1-alpine as base
+# Use the official Node.js image as a base image
+FROM node:20.11.1-alpine AS base
 
-# Add package file
+# Set the working directory
+WORKDIR /app
+
+# Add package file and install dependencies
 COPY package.json ./
-COPY yarn.lock ./
-COPY scripts/dev.sh ./scripts/dev.sh
+RUN yarn install --verbose
 
-# Install deps
-RUN yarn install
+# Generate prisma client
+RUN yarn prisma generate
 
-# Copy source
+# Copy source files and build the application with verbose output
 COPY src ./src
-COPY tsconfig.json ./tsconfig.json
-COPY openapi.yml ./openapi.yml
-
-# Build dist
+COPY tsconfig.json ./
 RUN yarn build
 
-# Start production image build
+# Start a new stage from the base image
 FROM node:20.11.1-alpine
 
-# Copy node modules and build directory
-COPY --from=base ./node_modules ./node_modules
-COPY --from=base /dist /dist
+# Set the working directory
+WORKDIR /app
 
-# Copy static files
-COPY src/public dist/src/public
+# Copy node_modules and build directory from the previous stage
+COPY --from=base /app/node_modules ./node_modules
+COPY --from=base /app/dist ./dist
 
-# Expose port 3000
+# Expose the port the app runs on
 EXPOSE 3000
-CMD ["dist/src/app/app.js"]
+
+# Start the application
+CMD ["node", "dist/src/app/app.js"]

@@ -1,5 +1,5 @@
 {
-  "name": "typescript-rest-api",
+  "name": "zenspire-be",
   "version": "1.0.0",
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seeders/seed.ts"
@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon run"
+    "dev": "nodemon run",
+    "build": "tsc"
   },
   "jest": {
     "transform": {

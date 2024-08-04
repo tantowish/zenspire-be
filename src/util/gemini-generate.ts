@@ -1,5 +1,4 @@
 import { Mood } from "@prisma/client";
-import { JsonValue } from "@prisma/client/runtime/library";
 import { ChatMessage } from "../model/chatbot-model";
 
 const {
