@@ -22,8 +22,7 @@ export class DiscussionController {
             const search = req.query.search as string
             const categoryParam = req.query.category as string;
             const categories = categoryParam ? categoryParam.split(',') : [];
-            console.log(categories)
-            const response = await DiscussionService.list(search, categories)
+            const response = await DiscussionService.list(req.user as User, categories, search)
             res.status(200).json({
                 data: response
             })

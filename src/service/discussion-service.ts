@@ -52,56 +52,143 @@ export class DiscussionService {
         return toDiscussionResponse(discussion)
     }
 
-    static async list(search?: string, category?: string[]): Promise<DiscussionResponse[]> {
-        const orConditions = [];
-    
-        if (search) {
-            orConditions.push(
-                { title: { contains: search } },
-                { body: { contains: search } }
-            );
-        }
-    
-        const whereCondition: any = {};
-    
-        if (orConditions.length > 0) {
-            whereCondition.OR = orConditions;
-        }
-    
-        if (category && category.length > 0) {
-            whereCondition.category = { hasSome: category };
-        }
-    
-        const discussions = await prismaClient.discussion.findMany({
-            select: {
-                id: true,
-                user_id: true,
-                title: true,
-                category: true,
-                body: true,
-                image: true,
-                created_at: true,
-                updated_at: true,
-                _count: {
-                    select: {
-                        comment: true,
-                        discussionLike: true,
+    static async list(user: User, category: string[], search?: string): Promise<DiscussionResponse[]> {
+        let discussions
+        console.log(category)
+        if(category?.length>0){
+            const orConditions = [];
+        
+            if (search) {
+                orConditions.push(
+                    { title: { contains: search } },
+                    { body: { contains: search } }
+                );
+            }
+        
+            const whereCondition: any = {};
+        
+            if (orConditions.length > 0) {
+                whereCondition.OR = orConditions;
+            }
+        
+            if (category && category.length > 0) {
+                whereCondition.category = { hasSome: category };
+            }
+        
+            discussions = await prismaClient.discussion.findMany({
+                select: {
+                    id: true,
+                    user_id: true,
+                    title: true,
+                    category: true,
+                    body: true,
+                    image: true,
+                    created_at: true,
+                    updated_at: true,
+                    _count: {
+                        select: {
+                            comment: true,
+                            discussionLike: true,
+                        },
+                    },
+                    user: {
+                        select: {
+                            experience_points: true,
+                            first_name: true,
+                            last_name: true,
+                            isAnonymous: true,
+                        },
                     },
                 },
-                user: {
-                    select: {
-                        experience_points: true,
-                        first_name: true,
-                        last_name: true,
-                        isAnonymous: true,
+                where: Object.keys(whereCondition).length > 0 ? whereCondition : undefined,
+                orderBy: {
+                    created_at: 'asc',
+                },
+            });
+        } else {
+            const categoryPreferences = await prismaClient.userData.findUnique({
+                select: {
+                    preferences: true
+                },
+                where:{
+                    user_id: user.id
+                }
+            }) 
+            console.log(categoryPreferences?.preferences)
+            const prefCategory = await prismaClient.discussion.findMany({
+                select: {
+                    id: true,
+                    user_id: true,
+                    title: true,
+                    category: true,
+                    body: true,
+                    image: true,
+                    created_at: true,
+                    updated_at: true,
+                    _count: {
+                        select: {
+                            comment: true,
+                            discussionLike: true,
+                        },
+                    },
+                    user: {
+                        select: {
+                            experience_points: true,
+                            first_name: true,
+                            last_name: true,
+                            isAnonymous: true,
+                        },
                     },
                 },
-            },
-            where: Object.keys(whereCondition).length > 0 ? whereCondition : undefined,
-            orderBy: {
-                created_at: 'asc',
-            },
-        });
+                where: {
+                    category: {
+                        hasSome: categoryPreferences?.preferences,
+                    },
+                },
+                orderBy: {
+                    updated_at: 'desc',
+                },
+            });
+
+            const notPrefCategory = await prismaClient.discussion.findMany({
+                select: {
+                    id: true,
+                    user_id: true,
+                    title: true,
+                    category: true,
+                    body: true,
+                    image: true,
+                    created_at: true,
+                    updated_at: true,
+                    _count: {
+                        select: {
+                            comment: true,
+                            discussionLike: true,
+                        },
+                    },
+                    user: {
+                        select: {
+                            experience_points: true,
+                            first_name: true,
+                            last_name: true,
+                            isAnonymous: true,
+                        },
+                    },
+                },
+                where: {
+                    NOT: {
+                        category: {
+                            hasSome: categoryPreferences?.preferences,
+                        },
+                    },
+                },
+                orderBy: {
+                    updated_at: 'desc',
+                },
+            });
+
+            discussions = [...prefCategory, ...notPrefCategory]
+        }
     
         return toDiscussionArrayFullResponse(discussions);
     }    
