@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { CreateDiscussionRequest, DiscussionDetailResponse, DiscussionLikeResponse, DiscussionResponse, UpdateDiscussionRequest, toDiscussionArrayFullResponse, toDiscussionArrayFullResponsePopular, toDiscussionDetailResponse, toDiscussionLikeResponse, toDiscussionResponse } from "../model/discussion-model";
 import { Validation } from "../validation/validation";
 import { DiscussionValidation } from "../validation/discussion-validation";
@@ -196,26 +196,53 @@ export class DiscussionService {
         return toDiscussionArrayFullResponse(discussions)
     }
 
-    static async listPopular(): Promise<DiscussionResponse[]> {
+    static async listPopular(user: User): Promise<DiscussionResponse[]> {
         const twoWeeksAgo = moment().subtract(2, 'weeks').toDate();
+        const categoryPreferences = await prismaClient.userData.findUnique({
+            select: {
+                preferences: true
+            },
+            where:{
+                user_id: user.id
+            }
+        })
 
-        let discussions: DiscussionPopular[] = await prismaClient.$queryRaw`
-            SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
-                (SELECT CAST(COUNT(*) AS INTEGER) FROM comments c WHERE c.discussion_id = d.id) AS comment,
-                (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
-            FROM discussions d
-            INNER JOIN users u ON d.user_id = u.id
-            WHERE d.updated_at >= ${twoWeeksAgo}
-            ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
-            LIMIT 1;
-            `;
-
-        if (discussions.length === 0) {
+        let discussions: DiscussionPopular[]
+        if(categoryPreferences && categoryPreferences.preferences.length>0){
             discussions = await prismaClient.$queryRaw`
                 SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
-                    (SELECT CAST(COUNT(*) AS INTEGER) FROM comment c WHERE c.discussion_id = d.id) AS comment,
-                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_like dl WHERE dl.discussion_id = d.id) AS "discussionLike"
-                FROM discussion d
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM comments c WHERE c.discussion_id = d.id) AS comment,
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
+                FROM discussions d
+                INNER JOIN users u ON d.user_id = u.id
+                WHERE d.updated_at >= ${twoWeeksAgo} 
+                    AND EXISTS (
+                        SELECT 1 FROM UNNEST(d.category) AS CATEGORIES
+                        WHERE CATEGORIES = ANY(${categoryPreferences.preferences}::text[])
+                    ) 
+                ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
+                LIMIT 1;
+                `;
+        } else {
+            discussions = await prismaClient.$queryRaw`
+                SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM comments c WHERE c.discussion_id = d.id) AS comment,
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
+                FROM discussions d
+                INNER JOIN users u ON d.user_id = u.id
+                WHERE d.updated_at >= ${twoWeeksAgo}
+                ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
+                LIMIT 1;
+                `;
+        }
+
+        if (discussions.length === 0) {
+            // console.log("masuk")
+            discussions = await prismaClient.$queryRaw`
+                SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM comments c WHERE c.discussion_id = d.id) AS comment,
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
+                FROM discussions d
                 INNER JOIN users u ON d.user_id = u.id
                 ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
                 LIMIT 1;

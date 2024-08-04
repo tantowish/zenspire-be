@@ -45,7 +45,7 @@ export class DiscussionController {
 
     static async listPopular(req: UserRequest, res: Response, next: NextFunction) {
         try {
-            const response = await DiscussionService.listPopular()
+            const response = await DiscussionService.listPopular(req.user as User)
             res.status(200).json({
                 data: response
             })
