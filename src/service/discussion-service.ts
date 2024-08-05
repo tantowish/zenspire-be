@@ -113,7 +113,8 @@ export class DiscussionService {
                 where:{
                     user_id: user.id
                 }
-            }) 
+            })
+            const userPreferences = categoryPreferences?.preferences ? categoryPreferences?.preferences : []
             console.log(categoryPreferences?.preferences)
             const prefCategory = await prismaClient.discussion.findMany({
                 select: {
@@ -142,7 +143,7 @@ export class DiscussionService {
                 },
                 where: {
                     category: {
-                        hasSome: categoryPreferences?.preferences,
+                        hasSome: userPreferences,
                     },
                 },
                 orderBy: {
@@ -178,7 +179,7 @@ export class DiscussionService {
                 where: {
                     NOT: {
                         category: {
-                            hasSome: categoryPreferences?.preferences,
+                            hasSome: userPreferences,
                         },
                     },
                 },
