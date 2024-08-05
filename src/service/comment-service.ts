@@ -96,6 +96,9 @@ export class CommentService {
                         isAnonymous: true,
                     }
                 }
+            },
+            orderBy: {
+                created_at: 'desc'
             }
         })
 

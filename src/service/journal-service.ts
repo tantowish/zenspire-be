@@ -83,6 +83,9 @@ export class JournalService {
                   lte: utcEndDate,
                 },
               },
+              orderBy: {
+                created_at: 'desc'
+              }
             });
         }
         return toJournalArrayResponse(journals)

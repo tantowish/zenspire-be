@@ -102,7 +102,7 @@ export class DiscussionService {
                 },
                 where: Object.keys(whereCondition).length > 0 ? whereCondition : undefined,
                 orderBy: {
-                    created_at: 'asc',
+                    updated_at: 'desc',
                 },
             });
         } else {
@@ -183,7 +183,7 @@ export class DiscussionService {
                     },
                 },
                 orderBy: {
-                    updated_at: 'desc',
+                    created_at: 'desc',
                 },
             });
 
@@ -220,7 +220,7 @@ export class DiscussionService {
                 },
             },
             orderBy: {
-                updated_at: 'asc',
+                created_at: 'desc',
             },
             where: {
                 user_id: user.id,
@@ -263,7 +263,7 @@ export class DiscussionService {
                 },
             },
             orderBy: {
-                updated_at: 'asc',
+                created_at: 'desc',
             },
             where: {
                 discussionLike: {
@@ -302,12 +302,12 @@ export class DiscussionService {
                     (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
                 FROM discussions d
                 INNER JOIN users u ON d.user_id = u.id
-                WHERE d.updated_at >= ${twoWeeksAgo} 
+                WHERE d.created_at >= ${twoWeeksAgo} 
                     AND EXISTS (
                         SELECT 1 FROM UNNEST(d.category) AS CATEGORIES
                         WHERE CATEGORIES = ANY(${categoryPreferences.preferences}::text[])
                     ) 
-                ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
+                ORDER BY comment DESC, "discussionLike" DESC, d.created_at DESC
                 LIMIT 1;
                 `;
         } else {
@@ -317,8 +317,8 @@ export class DiscussionService {
                     (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
                 FROM discussions d
                 INNER JOIN users u ON d.user_id = u.id
-                WHERE d.updated_at >= ${twoWeeksAgo}
-                ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
+                WHERE d.created_at >= ${twoWeeksAgo}
+                ORDER BY comment DESC, "discussionLike" DESC, d.created_at DESC
                 LIMIT 1;
                 `;
         }
@@ -331,7 +331,7 @@ export class DiscussionService {
                     (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
                 FROM discussions d
                 INNER JOIN users u ON d.user_id = u.id
-                ORDER BY comment DESC, "discussionLike" DESC, d.updated_at ASC
+                ORDER BY comment DESC, "discussionLike" DESC, d.created_at DESC
                 LIMIT 1;
                 `;
         }
@@ -388,6 +388,9 @@ export class DiscussionService {
                             },
                         },
                     },
+                    orderBy: {
+                        created_at: 'desc'
+                    }
                 },
             },
         });
