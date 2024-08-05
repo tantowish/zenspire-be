@@ -102,7 +102,7 @@ export class DiscussionService {
                 },
                 where: Object.keys(whereCondition).length > 0 ? whereCondition : undefined,
                 orderBy: {
-                    updated_at: 'desc',
+                    created_at: 'desc',
                 },
             });
         } else {
@@ -146,7 +146,7 @@ export class DiscussionService {
                     },
                 },
                 orderBy: {
-                    updated_at: 'desc',
+                    created_at: 'desc',
                 },
             });
 

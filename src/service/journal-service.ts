@@ -66,6 +66,9 @@ export class JournalService {
                             { title: { contains: search } },
                         ],
                     }),
+                },
+                orderBy: {
+                    created_at: 'desc'
                 }
             })
         }
