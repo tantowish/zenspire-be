@@ -54,7 +54,6 @@ export class DiscussionService {
 
     static async list(user: User, category: string[], search?: string): Promise<DiscussionResponse[]> {
         let discussions
-        console.log(category)
         if(category?.length>0){
             const orConditions = [];
         
@@ -120,7 +119,6 @@ export class DiscussionService {
                 }
             })
             const userPreferences = categoryPreferences?.preferences ? categoryPreferences?.preferences : []
-            console.log(categoryPreferences?.preferences)
             const prefCategory = await prismaClient.discussion.findMany({
                 select: {
                     id: true,
@@ -206,7 +204,6 @@ export class DiscussionService {
             discussions = [...prefCategory, ...notPrefCategory]
         }
     
-        console.log(discussions)
         return toDiscussionArrayFullResponse(discussions);
     }    
 
@@ -340,7 +337,6 @@ export class DiscussionService {
                 ORDER BY comment DESC, "discussionLike" DESC, d.created_at DESC
                 LIMIT 1;
                 `;
-        console.log(discussions)
         } else {
             discussions = await prismaClient.$queryRaw`
                 SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
@@ -358,7 +354,6 @@ export class DiscussionService {
         }
 
         if (discussions.length === 0) {
-            // console.log("masuk")
             discussions = await prismaClient.$queryRaw`
                 SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
                     (SELECT CAST(COUNT(*) AS INTEGER) FROM comments c WHERE c.discussion_id = d.id) AS comment,

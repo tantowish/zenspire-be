@@ -25,6 +25,7 @@ Response Body (Success) :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "true",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
@@ -44,6 +45,7 @@ Response Body (Success) :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "true",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
@@ -93,6 +95,7 @@ Response Body (Success) :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "true",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
@@ -112,6 +115,7 @@ Response Body (Success) :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "True",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
@@ -161,6 +165,7 @@ Response Body (Success) :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "true",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
@@ -180,6 +185,7 @@ Response Body (Success) :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "true",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
@@ -225,6 +231,7 @@ Response Body (Success) :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "true",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
@@ -244,6 +251,7 @@ Response Body (Success) :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "true",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
@@ -287,6 +295,7 @@ Response Body :
 			"category": ["lorem", "epsum"],
 			"body": "lorem epsum",
 			"image": "lorem epsum.png",
+			"isLiked": "true",
 			"created_at": "2024-04-25 15:21:12",
 			"updated_at": "2024-04-25 15:21:12",
 			"_count": {
