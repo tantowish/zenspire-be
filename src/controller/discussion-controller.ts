@@ -66,7 +66,7 @@ export class DiscussionController {
 
     static async get(req: UserRequest, res: Response, next: NextFunction) {
         try {
-            const response = await DiscussionService.get(parseInt(req.params.id))
+            const response = await DiscussionService.get(req.user as User, parseInt(req.params.id))
             res.status(200).json({
                 data: response
             })

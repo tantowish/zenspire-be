@@ -1,4 +1,4 @@
-import { Discussion } from "@prisma/client";
+import { Discussion, DiscussionLike } from "@prisma/client";
 import { CommentWithUser } from "./comment-types";
 
 export type DiscussionWithCount = Discussion & {
@@ -12,6 +12,7 @@ export type DiscussionWithCount = Discussion & {
         last_name: string | null;
         isAnonymous: boolean;
     };
+    discussionLike: DiscussionLike[]
 };
 
 export type DiscussionPopular = Discussion & {
@@ -20,7 +21,8 @@ export type DiscussionPopular = Discussion & {
     last_name: string | null
     isAnonymous: boolean
     comment: number,
-    discussionLike: number;
+    discussionLike: number,
+    isLiked: boolean
 }
 
 export type DiscussionDetail = Discussion & {
@@ -34,5 +36,6 @@ export type DiscussionDetail = Discussion & {
         last_name: string | null;
         isAnonymous: boolean;
     };
-    comment: CommentWithUser[]
+    comment: CommentWithUser[],
+    discussionLike: DiscussionLike[]
 };

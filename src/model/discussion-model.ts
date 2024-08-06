@@ -30,6 +30,7 @@ export type DiscussionFullResponse = {
     image?: string,
     created_at: string,
     updated_at: string,
+    // isLiked: boolean,
     _count: {
         comment: number;
         discussionLike: number;
@@ -49,6 +50,7 @@ export type DiscussionDetailResponse = {
     category: string[],
     body: string,
     image?: string,
+    isLiked: boolean,
     created_at: string,
     updated_at: string,
     _count: {
@@ -106,7 +108,8 @@ export function toDiscussionArrayFullResponse(discussions: DiscussionWithCount[]
         category: discussion.category,
         title: discussion.title,
         body: discussion.body,
-        image: discussion.image!, // Handle optional image
+        image: discussion.image!,
+        isLiked: discussion.discussionLike.length > 0 ? true : false,
         created_at: moment(discussion.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         updated_at: moment(discussion.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         _count: discussion._count,
@@ -127,6 +130,7 @@ export function toDiscussionArrayFullResponsePopular(discussions: DiscussionPopu
         category: discussion.category,
         body: discussion.body,
         image: discussion.image!, // Handle optional image
+        isLiked: discussion.isLiked,
         created_at: moment(discussion.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         updated_at: moment(discussion.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         _count: {
@@ -150,6 +154,7 @@ export function toDiscussionDetailResponse(discussion: DiscussionDetail): Discus
         category: discussion.category,
         body: discussion.body,
         image: discussion.image!,
+        isLiked: discussion.discussionLike.length > 0 ? true : false,
         created_at: moment(discussion.created_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         updated_at: moment(discussion.updated_at).tz(timezone).format("YYYY-MM-DD HH:mm:ss"),
         _count: {

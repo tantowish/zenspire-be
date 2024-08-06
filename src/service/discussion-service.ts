@@ -99,6 +99,11 @@ export class DiscussionService {
                             isAnonymous: true,
                         },
                     },
+                    discussionLike: {
+                        where:{
+                            user_id: user.id
+                        }
+                    }
                 },
                 where: Object.keys(whereCondition).length > 0 ? whereCondition : undefined,
                 orderBy: {
@@ -140,6 +145,11 @@ export class DiscussionService {
                             isAnonymous: true,
                         },
                     },
+                    discussionLike: {
+                        where:{
+                            user_id: user.id
+                        }
+                    }
                 },
                 where: {
                     category: {
@@ -175,6 +185,11 @@ export class DiscussionService {
                             isAnonymous: true,
                         },
                     },
+                    discussionLike: {
+                        where:{
+                            user_id: user.id
+                        }
+                    }
                 },
                 where: {
                     NOT: {
@@ -191,6 +206,7 @@ export class DiscussionService {
             discussions = [...prefCategory, ...notPrefCategory]
         }
     
+        console.log(discussions)
         return toDiscussionArrayFullResponse(discussions);
     }    
 
@@ -219,6 +235,11 @@ export class DiscussionService {
                         isAnonymous: true,
                     },
                 },
+                discussionLike: {
+                    where:{
+                        user_id: user.id
+                    }
+                }
             },
             orderBy: {
                 created_at: 'desc',
@@ -262,6 +283,11 @@ export class DiscussionService {
                         isAnonymous: true,
                     },
                 },
+                discussionLike: {
+                    where:{
+                        user_id: user.id
+                    }
+                }
             },
             orderBy: {
                 created_at: 'desc',
@@ -300,7 +326,10 @@ export class DiscussionService {
             discussions = await prismaClient.$queryRaw`
                 SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
                     (SELECT CAST(COUNT(*) AS INTEGER) FROM comments c WHERE c.discussion_id = d.id) AS comment,
-                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike",
+                    EXISTS (
+                        SELECT 1 FROM discussion_likes dl WHERE dl.discussion_id = d.id AND dl.user_id = ${user.id}
+                    ) AS "isLiked"
                 FROM discussions d
                 INNER JOIN users u ON d.user_id = u.id
                 WHERE d.created_at >= ${twoWeeksAgo} 
@@ -311,11 +340,15 @@ export class DiscussionService {
                 ORDER BY comment DESC, "discussionLike" DESC, d.created_at DESC
                 LIMIT 1;
                 `;
+        console.log(discussions)
         } else {
             discussions = await prismaClient.$queryRaw`
                 SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
                     (SELECT CAST(COUNT(*) AS INTEGER) FROM comments c WHERE c.discussion_id = d.id) AS comment,
-                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike",
+                    EXISTS (
+                        SELECT 1 FROM discussion_likes dl WHERE dl.discussion_id = d.id AND dl.user_id = ${user.id}
+                    ) AS "isLiked"
                 FROM discussions d
                 INNER JOIN users u ON d.user_id = u.id
                 WHERE d.created_at >= ${twoWeeksAgo}
@@ -329,7 +362,10 @@ export class DiscussionService {
             discussions = await prismaClient.$queryRaw`
                 SELECT d.*, u.first_name, u.last_name, u."isAnonymous",
                     (SELECT CAST(COUNT(*) AS INTEGER) FROM comments c WHERE c.discussion_id = d.id) AS comment,
-                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike"
+                    (SELECT CAST(COUNT(*) AS INTEGER) FROM discussion_likes dl WHERE dl.discussion_id = d.id) AS "discussionLike",
+                    EXISTS (
+                        SELECT 1 FROM discussion_likes dl WHERE dl.discussion_id = d.id AND dl.user_id = ${user.id}
+                    ) AS "isLiked"
                 FROM discussions d
                 INNER JOIN users u ON d.user_id = u.id
                 ORDER BY comment DESC, "discussionLike" DESC, d.created_at DESC
@@ -340,7 +376,7 @@ export class DiscussionService {
         return toDiscussionArrayFullResponsePopular(discussions)
     }
 
-    static async get(id: number): Promise<DiscussionDetailResponse> {
+    static async get(user: User, id: number): Promise<DiscussionDetailResponse> {
         if (!id) {
             throw new ResponseErorr(500, "id is invalid")
         }
@@ -393,6 +429,11 @@ export class DiscussionService {
                         created_at: 'desc'
                     }
                 },
+                discussionLike: {
+                    where: {
+                        user_id: user.id
+                    }
+                }
             },
         });
 
